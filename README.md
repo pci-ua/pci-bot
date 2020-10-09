@@ -1,14 +1,14 @@
 <div align="center">
 	<br/>
 	<p>
-		<a href="https://cdn.discordapp.com/attachments/677440639322947584/754303664629219349/PCi_discord_qrcode.png"> <img src="TODO" /> </a>
+		<a href="https://projetcohesion.info/"> <img src="./PCi_discord_qrcode.png" /> </a>
 	</p>
 </div>
 
 # PC[bot]
 
 ## Table des matières
- - [À propos](À propos)
+ - [À propos](#à propos)
  - [Exemple d'utilisation](#exemple)
  - [contribution](#contribuer)
  - [aide](#aide)
