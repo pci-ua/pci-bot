@@ -1,7 +1,3 @@
- > Changer le lien du repository github pour la commande ?code ?git
  > Faire l'aide dans la commande ?aide ?help
  > corriger les fautes de français
  > Factoriser les messages d'erreur en un même point ( et texte en général ) ( un ou plusieurs mais séparé et pas trop)
- > Rajouter des commentaires
- > Renforcer le readme
- > push github
