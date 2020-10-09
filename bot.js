@@ -11,10 +11,10 @@ const Discord 		= require('discord.js');
 
 //Contenu séparé
 const Token 		= require('safety.js');
-const Dice 		= require('dice.js');
+const Dice 			= require('dice.js');
 const SuperLoger 	= require('superLog.js');
 const Message		= require('preMadeMessage.js');
-const Club		= require('clubManager.js');
+const Club			= require('clubManager.js');
 
 //Constante
 const prefix  = '?';
@@ -34,6 +34,7 @@ const bot = new Discord.Client();
 bot.on('ready', ready => {
 	connected = true;
 	SuperLoger.log('Démarrer');
+	bot.user.setActivity('vos demandes: ' + prefix + 'aide' , {'type': 'LISTENING'});
 });
 bot.on('disconnect', (errorMessage, code) => {
 	SuperLoger.log('Crash',errorMessage,code);
@@ -121,10 +122,11 @@ bot.on('raw', async packet => {
     }
 });
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< à finirs
-function retirerRoleUtilisateur( user, nomRole) {}
+function retirerRoleUtilisateur( user, nomRole) { console.log( user , user.roles ); }
 bot.on('messageReactionRemove', async data =>{
         if(parseInt(data.message_id) == ID_message_d_inscription) {
             let who = bot.users.fetch( data.user_id );
+			retirerRoleUtilisateur( who , "test");
             switch( data.emoji.id ) {
                 case "L'identifiant de la mention": retirerRoleUtilisateur( who , "le nom du rôle correspondant à l'id du truc" ); break;                
             }
