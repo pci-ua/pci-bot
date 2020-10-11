@@ -122,11 +122,11 @@ bot.on('raw', async packet => {
     }
 });
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< à finirs
-function retirerRoleUtilisateur( user, nomRole) { console.log( user , user.roles ); }
+async function retirerRoleUtilisateur( user, roleID ) {  }
 bot.on('messageReactionRemove', async data =>{
+	console.log( data);
         if(parseInt(data.message_id) == ID_message_d_inscription) {
             let who = bot.users.fetch( data.user_id );
-			retirerRoleUtilisateur( who , "test");
             switch( data.emoji.id ) {
                 case "L'identifiant de la mention": retirerRoleUtilisateur( who , "le nom du rôle correspondant à l'id du truc" ); break;                
             }
