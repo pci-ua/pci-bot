@@ -11,10 +11,10 @@ const Discord 		= require('discord.js');
 
 //Contenu séparé
 const Token 		= require('safety.js');
-const Dice 			= require('dice.js');
+const Dice 		= require('dice.js');
 const SuperLoger 	= require('superLog.js');
 const Message		= require('preMadeMessage.js');
-const Club			= require('clubManager.js');
+const Club		= require('clubManager.js');
 
 //Constante
 const prefix  = '?';
@@ -23,6 +23,9 @@ const events = {
 	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
 };
 const ID_message_d_inscription = 763699097978273812; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
+const ID_message_spe_master = 7685764565464644654; // <<< c'est ici qu'il faut inséré l'identifiant du messager de selection des options de M2
+const Accept_inscription = ['L1','L2','L3','L3Pro','M1','M2','Doctorant'];
+const Accept_spe_master = ['mACDI','mID'];
 
 //Variable global
 let connected = false;
@@ -39,7 +42,7 @@ bot.on('ready', ready => {
 bot.on('disconnect', (errorMessage, code) => {
 	SuperLoger.log('Crash',errorMessage,code);
 	connected = false;
-	
+
 	let now = new Date();
 	if(now - lastCrash > 600000 /* Dernier crash il y a plus de 10 minutes en ms */) {
 		setTimeout(LogOn, 2500);
@@ -54,18 +57,18 @@ bot.on('message', message => {
 	// Sortie préventive
 	if( message.author.bot ) return;
 	if( ! message.content.startsWith( prefix ) ) return;
-	
+
 	// Récupération des données
 	let buffer = message.content
 		.replace(/ +/g,' ') //Supression des doubles espaces entre paramètre
 		.slice( prefix.length ) //Supression du prefix
 		.split(' '); //Séparation des paramètres
-		
+
 	const command = {
 		'name': buffer.shift().toLowerCase(),
 		'args': buffer,
 	};
-	
+
 	// Traitement
 	switch( command.name ) {
 		case 'hey':
@@ -121,31 +124,39 @@ bot.on('raw', async packet => {
         bot.emit( events[ packet.t ], packet.d );
     }
 });
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< à finirs
-async function retirerRoleUtilisateur( user, roleID ) {  }
-bot.on('messageReactionRemove', async data =>{
-	console.log( data);
-        if(parseInt(data.message_id) == ID_message_d_inscription) {
-            let who = bot.users.fetch( data.user_id );
-            switch( data.emoji.id ) {
-                case "L'identifiant de la mention": retirerRoleUtilisateur( who , "le nom du rôle correspondant à l'id du truc" ); break;                
-            }
-        }
-    }
-); 
 
-function ajouterRoleUtilisateur( user, nomRole) {}
+bot.on('messageReactionRemove', async data =>{
+        if(parseInt(data.message_id) == ID_message_d_inscription) {
+                let serveur = bot.guilds.resolve( data.guild_id );
+		let membre = await serveur.members.fetch( data.user_id );
+		let roles = await serveur.roles.cache;
+		let index = Accept_inscription.indexOf( data.emoji.name );
+		if( index != -1 ) { membre.roles.remove( roles.find( x => x.name.replace(/ /ig,'') === Accept_inscription[index]).id ); }
+        } else if(parseInt(data.message_id) == ID_message_spe_master) {
+                let serveur = bot.guilds.resolve( data.guild_id );
+                let membre = await serveur.members.fetch( data.user_id );
+                let roles = await serveur.roles.cache;
+                let index = Accept_spe_master.indexOf( data.emoji.name );
+                if( index != -1 ) { membre.roles.remove( roles.find( x => x.name.replace(/ /ig,'') === Accept_spe_master[index]).id ); }
+	}
+    }
+);
 bot.on('messageReactionAdd', async data =>{
         if(parseInt(data.message_id) == ID_message_d_inscription) {
-            let who = bot.users.fetch( data.user_id );
-            switch( data.emoji.id ) {
-                case "L'identifiant de la mention": retirerRoleUtilisateur( who , "le nom du rôle correspondant à l'id du truc" ); break;                
-            }
+            	let serveur = bot.guilds.resolve( data.guild_id );
+		let membre = await serveur.members.fetch( data.user_id );
+		let roles = await serveur.roles.cache;
+		let index = Accept_inscription.indexOf( data.emoji.name );
+		if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === Accept_inscription[index]).id ); }
+        } else if(parseInt(data.message_id) == ID_message_spe_master) {
+                let serveur = bot.guilds.resolve( data.guild_id );
+                let membre = await serveur.members.fetch( data.user_id );
+                let roles = await serveur.roles.cache;
+                let index = Accept_spe_master.indexOf( data.emoji.name );
+                if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === Accept_spe_master[index]).id ); }
         }
     }
 );
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
 function LogOn() {
 	bot.login(Token.get());
