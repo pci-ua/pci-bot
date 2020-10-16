@@ -8,37 +8,95 @@
 
 //Libraire
 const Discord 		= require('discord.js');
+const fs = require('fs');
 
 //Contenu séparé
 const Token 		= require('safety.js');
-const Dice 		= require('dice.js');
 const SuperLoger 	= require('superLog.js');
-const Message		= require('preMadeMessage.js');
-const Club		= require('clubManager.js');
+
+//Initialisation du bot
+const bot = new Discord.Client();
+
+//Librairire
+bot.discord = require('discord.js');
+bot.message	= require('preMadeMessage.js');
+bot.club = require('clubManager.js');
 
 //Constante
-const prefix  = '?';
+// A voir pour mettre dans un fichier de config en .json qui serait dans le gitignore, un fichier config.json.template pourrai être intégrée dans le dépot
+bot.prefix  = '?';
+
+bot.ID_message_d_inscription = 766433177958350898; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
+bot.ID_message_spe_master = 7685764565464644654; // <<< c'est ici qu'il faut inséré l'identifiant du messager de selection des options de M2
+
+bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1','M2','Doctorant'];
+bot.Accept_spe_master = ['mACDI','mID'];
+
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
 	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
 };
-const ID_message_d_inscription = 763699097978273812; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
-const ID_message_spe_master = 7685764565464644654; // <<< c'est ici qu'il faut inséré l'identifiant du messager de selection des options de M2
-const Accept_inscription = ['L1','L2','L3','L3Pro','M1','M2','Doctorant'];
-const Accept_spe_master = ['mACDI','mID'];
 
 //Variable global
 let connected = false;
 let lastCrash = 0;
-//Initialisation du bot
-const bot = new Discord.Client();
+
+// On stock les commandes , les aliases et les events dans des Collections
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+bot.events = new Discord.Collection();
+
+bot.loadCommands = () =>
+{
+	bot.commands.clear();
+	bot.aliases.clear();
+
+	// On lit tout le dossier commands , un fichier correspond à une commande
+	fs.readdir("./commands/", (err, files) => {
+		if (err) return console.log(err);
+		files.forEach(file => {
+			if (!file.endsWith(".js")) return;
+			delete require.cache[require.resolve(`./commands/${file}`)];
+			let props = require(`./commands/${file}`);
+			let commandName = file.split(".")[0];
+			bot.commands.set(commandName, props);
+			
+			if(props.config)
+			{
+				if(props.config.aliases)
+				{
+					props.config.aliases.forEach(alias => {
+						bot.aliases.set(alias, props);
+					});
+				}
+			}
+		});
+	});
+}
+
+bot.loadEvents = () =>
+{
+	bot.events.clear();
+
+	// Pareil que pour les commande, un fichier correspond à un event
+	fs.readdir('./events/', (err, files) => {
+		if (err) console.log(err);
+		files.forEach(file => {
+			delete require.cache[require.resolve(`./events/${file}`)];
+			let eventFunc = require(`./events/${file}`);
+			let eventName = file.split(".")[0];
+			bot.on(eventName, (...args) => eventFunc.run(bot, ...args));
+		});
+	});
+}
 
 // Basic events handler
 bot.on('ready', ready => {
 	connected = true;
 	SuperLoger.log('Démarrer');
-	bot.user.setActivity('vos demandes: ' + prefix + 'aide' , {'type': 'LISTENING'});
+	bot.user.setActivity('vos demandes: ' + bot.prefix + 'aide' , {'type': 'LISTENING'});
 });
+
 bot.on('disconnect', (errorMessage, code) => {
 	SuperLoger.log('Crash',errorMessage,code);
 	connected = false;
@@ -49,74 +107,6 @@ bot.on('disconnect', (errorMessage, code) => {
 	}
 });
 
-
-
-
-//
-bot.on('message', message => {
-	// Sortie préventive
-	if( message.author.bot ) return;
-	if( ! message.content.startsWith( prefix ) ) return;
-
-	// Récupération des données
-	let buffer = message.content
-		.replace(/ +/g,' ') //Supression des doubles espaces entre paramètre
-		.slice( prefix.length ) //Supression du prefix
-		.split(' '); //Séparation des paramètres
-
-	const command = {
-		'name': buffer.shift().toLowerCase(),
-		'args': buffer,
-	};
-
-	// Traitement
-	switch( command.name ) {
-		case 'hey':
-		case 'hi':
-		case 'hello':
-		case 'bonjour':
-		case 'bonsoir':
-			let liste = ['bonjour','bonsoir','salut','hello','hi','howdy'];
-			message.reply( liste[Math.floor(Math.random()*liste.length)] );
-			break;
-		case 'inv':
-		case 'invitation':
-			message.reply( Message.invitation );
-			break;
-		case 'code':
-		case 'git':
-		case 'github':
-			message.reply(Message.code);
-			break;
-		case 'help':
-		case 'aide':
-			if(message.guild !== null)
-				message.reply(Message.aideCourte);
-			message.author.send(Message.aideLongue);
-			break;
-		case 'dice':
-		case 'roll':
-			let reponse = Dice.roll( command.args );
-			if( reponse.length > 255 && messageSurServeur(message)) {
-				//message trop long et on est sur un serveur
-				message.reply(Message.antiSPAM);
-				message.author.send(reponse);
-			} else
-				message.reply(reponse);
-			break;
-		case 'sub':
-		case 'club':
-			if(message.guild === null)
-				message.reply(Message.serveurSeulement);
-			else
-				message.reply(Club.manage( command.args , message ));
-			break;
-		default:
-			message.reply(Message.commandeInconnu);
-	}
-});
-
-
 bot.on('raw', async packet => {
     //packet.t = type de packet
     //packet.d = data du packet ( donnée )
@@ -125,40 +115,11 @@ bot.on('raw', async packet => {
     }
 });
 
-bot.on('messageReactionRemove', async data =>{
-        if(parseInt(data.message_id) == ID_message_d_inscription) {
-                let serveur = bot.guilds.resolve( data.guild_id );
-		let membre = await serveur.members.fetch( data.user_id );
-		let roles = await serveur.roles.cache;
-		let index = Accept_inscription.indexOf( data.emoji.name );
-		if( index != -1 ) { membre.roles.remove( roles.find( x => x.name.replace(/ /ig,'') === Accept_inscription[index]).id ); }
-        } else if(parseInt(data.message_id) == ID_message_spe_master) {
-                let serveur = bot.guilds.resolve( data.guild_id );
-                let membre = await serveur.members.fetch( data.user_id );
-                let roles = await serveur.roles.cache;
-                let index = Accept_spe_master.indexOf( data.emoji.name );
-                if( index != -1 ) { membre.roles.remove( roles.find( x => x.name.replace(/ /ig,'') === Accept_spe_master[index]).id ); }
-	}
-    }
-);
-bot.on('messageReactionAdd', async data =>{
-        if(parseInt(data.message_id) == ID_message_d_inscription) {
-            	let serveur = bot.guilds.resolve( data.guild_id );
-		let membre = await serveur.members.fetch( data.user_id );
-		let roles = await serveur.roles.cache;
-		let index = Accept_inscription.indexOf( data.emoji.name );
-		if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === Accept_inscription[index]).id ); }
-        } else if(parseInt(data.message_id) == ID_message_spe_master) {
-                let serveur = bot.guilds.resolve( data.guild_id );
-                let membre = await serveur.members.fetch( data.user_id );
-                let roles = await serveur.roles.cache;
-                let index = Accept_spe_master.indexOf( data.emoji.name );
-                if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === Accept_spe_master[index]).id ); }
-        }
-    }
-);
-
 function LogOn() {
+	// On charge les commandes et les events
+	bot.loadCommands();
+	bot.loadEvents();
+
 	bot.login(Token.get());
 }
 
