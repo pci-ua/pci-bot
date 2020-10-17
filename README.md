@@ -8,7 +8,7 @@
 # PC[bot]
 
 ## Table des matières
- - [À propos](#À propos)
+ - [À propos](#À)
  - [Exemple d'utilisation](#exemple)
  - [contribution](#contribuer)
  - [aide](#aide)
