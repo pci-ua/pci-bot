@@ -34,6 +34,6 @@ Vous êtes libres de contribuer à ce projet, mais vérifiez tout de même ces q
 Si vous rencontrer un quelconque problème n'hésiter pas à contacter les gérants de ce repository
 
 ## Requis
- - nodejs V10.21.0 ( or greater )
+ - nodejs v12.19.0
  - discord.js V12.3.1
 
