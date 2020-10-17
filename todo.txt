@@ -1,3 +1,0 @@
- > Faire l'aide dans la commande ?aide ?help
- > corriger les fautes de français
- > Factoriser les messages d'erreur en un même point ( et texte en général ) ( un ou plusieurs mais séparé et pas trop)
