@@ -18,6 +18,6 @@ exports.config = {
 // Génération automatique de la commande help
 exports.help = {
     name:"DICE",
-    description:"J'ai pas compris la commande",
+    description:"Lance un dé virtuel ( retourne un nombre aléatoire )",
     usage:"dice [nombre ...]"
 }

@@ -25,12 +25,10 @@ bot.club = require('clubManager.js');
 //Constante
 // A voir pour mettre dans un fichier de config en .json qui serait dans le gitignore, un fichier config.json.template pourrai être intégrée dans le dépot
 bot.prefix  = '?';
-
-bot.ID_message_d_inscription = 766433177958350898; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
-bot.ID_message_spe_master = 7685764565464644654; // <<< c'est ici qu'il faut inséré l'identifiant du messager de selection des options de M2
-
-bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1','M2','Doctorant'];
-bot.Accept_spe_master = ['mACDI','mID'];
+bot.pingRoleChannelId = '770040260415193108';
+bot.ID_message_d_inscription = 770255995091419176; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
+bot.Verif_inscription = ['Doctorant','alu','ens'];
+bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
 
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
@@ -60,7 +58,7 @@ bot.loadCommands = () =>
 			let props = require(`./commands/${file}`);
 			let commandName = file.split(".")[0];
 			bot.commands.set(commandName, props);
-			
+
 			if(props.config)
 			{
 				if(props.config.aliases)
