@@ -21,7 +21,9 @@ PC\[bot\] est un robot de gestion du discord de PC\[i\]
 
 ## Exemple d'utilisation
 
-**TO DO**
+`?aide`
+
+`?roll 1d6`
 
 ## Contribution
 

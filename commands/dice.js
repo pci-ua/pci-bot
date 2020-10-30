@@ -19,5 +19,5 @@ exports.config = {
 exports.help = {
     name:"DICE",
     description:"Lance un dé virtuel ( retourne un nombre aléatoire )",
-    usage:"dice [nombre ...]"
+    usage:"dice [nombre | xdy  <où x et y sont des nombres entier> ]"
 }

@@ -10,7 +10,7 @@ exports.config = {
 
 // Génération automatique de la commande help
 exports.help = {
-    name:"hello",
+    name:"HELLO",
     description:"Vous salue",
     usage:"hello"
 }

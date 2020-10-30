@@ -12,5 +12,5 @@ exports.config = {
 exports.help = {
     name:"SUB",
     description:"Vous ajoute au role",
-    usage:"sub [roleName] "
+    usage:"sub [roleName]"
 }

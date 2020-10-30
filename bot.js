@@ -2,8 +2,8 @@
 * PC[bot]
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
 * Authors contact : unknown, mathieu.toulon@free.fr
-* Release date : Not yet
-* Version : 2.1.2
+* Release date : 25/10/2020
+* Version : 2.2.0
 ********************/
 
 //Librairies externe

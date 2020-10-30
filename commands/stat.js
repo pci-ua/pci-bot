@@ -21,9 +21,11 @@ exports.run = (bot, message, args) => {
 	const msg_bot =
 `uptime : ${ getDurationString( (new Date()) - bot.beginTimeStamp ) }`
 ;
+	//ajout
 	msg.addField('Membres', msg_membres);
 	msg.addField('PC[bot]', msg_bot);
 	msg.addField('à venirs', "d'autre statistiques vont bientôt être disponible!!!");
+	//envoie
 	message.reply(msg);
 }
 
