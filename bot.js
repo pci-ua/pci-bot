@@ -3,30 +3,30 @@
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
 * Authors contact : unknown, mathieu.toulon@free.fr
 * Release date : Not yet
-* Version : 0.0.1
+* Version : 2.1.2
 ********************/
 
-//Libraire
-const Discord 		= require('discord.js');
+//Librairies externe
+const Discord = require('discord.js');
 const fs = require('fs');
 
 //Contenu séparé
-const Token 		= require('safety.js');
-const SuperLoger 	= require('superLog.js');
+const Token = require('safety.js');
+const SuperLoger = require('superLog.js');
 
 //Initialisation du bot
 const bot = new Discord.Client();
 
-//Librairire
+//Librairies interne
 bot.discord = require('discord.js');
-bot.message	= require('preMadeMessage.js');
+bot.message = require('preMadeMessage.js');
 bot.club = require('clubManager.js');
 
 //Constante
-// A voir pour mettre dans un fichier de config en .json qui serait dans le gitignore, un fichier config.json.template pourrai être intégrée dans le dépot
+// à mettre dans un fichier JSON
 bot.prefix  = '?';
 bot.pingRoleChannelId = '770040260415193108';
-bot.ID_message_d_inscription = 770255995091419176; // <<< c'est ici qu'il faut inséré l'identifiant du message d'inscription
+bot.ID_message_d_inscription = 770255995091419176;
 bot.Verif_inscription = ['Doctorant','alu','ens'];
 bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
 
@@ -38,6 +38,8 @@ const events = {
 //Variable global
 let connected = false;
 let lastCrash = 0;
+
+bot.beginTimeStamp = new Date();
 
 // On stock les commandes , les aliases et les events dans des Collections
 bot.commands = new Discord.Collection();

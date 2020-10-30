@@ -1,6 +1,6 @@
 {
 	"name": "PC[bot]",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": "Bot Discord de gestion du serveur PC[i]",
 	"main": "bot.js",
 	"authors": [
@@ -15,6 +15,6 @@
 	"license": "unknown",
 	"contact": [
 		"mathieu.toulon@free.fr",
-		"unknow"
+		"unknown"
 	]
 }

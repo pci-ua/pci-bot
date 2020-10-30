@@ -28,8 +28,7 @@ exports.run = (bot, message, args) => {
                 description += '__Alias__ : ' + command.config.aliases.join(', ');
 
             // On met inline un field sur deux
-            console.log(embed.fields.length % 2 != 0),
-            embed.addField(`${command.help.name}`, description, embed.fields.length % 2 != 0);
+            embed.addField(`${command.help.name}`, description);
         }
     });
 
