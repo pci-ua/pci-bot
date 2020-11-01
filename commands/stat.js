@@ -1,4 +1,4 @@
-exports.run = (bot, message, args) => {
+exports.run = async (bot, message, args) => {
 	let serveur = message.guild;
 	let msg = new bot.discord.MessageEmbed()
         .setColor('#0099ff')
@@ -9,8 +9,10 @@ exports.run = (bot, message, args) => {
         .setFooter('Si vous avez un problème n\'hesitez pas à contacter le staff de PCi', 'https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png');
 
 	// on s'assure que tous les membres sont dans le cache serveur
-	serveur.fetch();
-	serveur.members.fetch();
+	message.reply('please wait, this will take an certain amount of time');
+	const f=(a)=>a.charCodeAt(0);
+	try{for(let i='A';f(i)<=f('z');i=String.fromCharCode(f(i)+1))await serveur.members.fetch( {query:i,limit:30} );}
+	catch(err) { console.log('err',err); }
 	//Préparation
 	const msg_membres =
 `Le serveur compte actuellement ${serveur.memberCount} membres, dont\n` +
