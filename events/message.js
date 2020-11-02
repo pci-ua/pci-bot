@@ -22,7 +22,9 @@ exports.run = async(bot, message) => {
                 message.reply(bot.message.serveurSeulement);
             else
                 command.run(bot,message,args);
-        else
+        else if(message.content != "?")
             message.reply(bot.message.commandeInconnu);
+		else
+			;//on ignore juste les messages contenant juste le ?
     }          
 };
