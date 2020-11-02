@@ -9,7 +9,7 @@ exports.run = async (bot, message, args) => {
         .setFooter('Si vous avez un problème n\'hesitez pas à contacter le staff de PCi', 'https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png');
 
 	// on s'assure que tous les membres sont dans le cache serveur
-	message.reply('please wait, this will take an certain amount of time');
+	message.reply('Veuillez patienter, la réponse arrive.');
 	const f=(a)=>a.charCodeAt(0);
 	try{for(let i='A';f(i)<=f('z');i=String.fromCharCode(f(i)+1))await serveur.members.fetch( {query:i,limit:30} );}
 	catch(err) { console.log('err',err); }
@@ -26,7 +26,7 @@ exports.run = async (bot, message, args) => {
 	//ajout
 	msg.addField('Membres', msg_membres);
 	msg.addField('PC[bot]', msg_bot);
-	msg.addField('à venirs', "d'autre statistiques vont bientôt être disponible!!!");
+	msg.addField('à venir', "d'autres statistiques vont bientôt être disponibles!!!");
 	//envoie
 	message.reply(msg);
 }
@@ -51,9 +51,9 @@ function getDurationString(duration) {
 	const j = duration;
 	
 	let rep = '';
-	if(s >0) rep += s + 'seconde(s)'+' ';
-	if(m >0) rep += m + 'minute(s)'+' ';
-	if(h >0) rep += h + 'heure(s)'+' ';
 	if(j >0) rep += j + 'jour(s)'+'.';
+	if(h >0) rep += h + 'heure(s)'+' ';
+	if(m >0) rep += m + 'minute(s)'+' ';
+	if(s >0) rep += s + 'seconde(s)'+' ';
 	return rep;
 }
