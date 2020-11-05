@@ -9,6 +9,8 @@
 	],
 	"dependencies": {
 		"discord.js": "^12.3.1",
+		"follow-redirects": "^1.13.0",
+		"he": "^1.2.0",
 		"nodejs": "0.0.0"
 	},
 	"repository": "./",
