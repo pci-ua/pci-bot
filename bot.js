@@ -4,7 +4,7 @@
 * Authors contact : unknown, mathieu.toulon@free.fr
 * Release date : 25/10/2020
 * Last update : 02/12/2020
-* Version : 2.2.1
+* Version : 2.2.2
 ********************/
 
 //Librairies externes
