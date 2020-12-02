@@ -8,7 +8,7 @@
 # PC[bot]
 
 ## Table des matières
- - [À propos](#À propos)
+ - [À propos](#À)
  - [Exemple d'utilisation](#exemple)
  - [contribution](#contribuer)
  - [aide](#aide)
@@ -21,17 +21,19 @@ PC\[bot\] est un robot de gestion du discord de PC\[i\]
 
 ## Exemple d'utilisation
 
-**TO DO**
+`?aide`
+
+`?roll 1d6`
 
 ## Contribution
 
 Vous êtes libres de contribuer à ce projet, mais vérifiez tout de même ces quelques points :
- - Avant de créé une `issue` assurez vous qu'elles n'existes pas déjà
- - Avant de faire une `pull request` assurez vous que votre code fonctionne et qu'il est commenté
+ - Avant de créer une `issue` assurez-vous qu'elle n'existe pas déjà
+ - Avant de faire une `pull request` assurez-vous que votre code fonctionne et qu'il est commenté
 
 ## Aide
 
-Si vous rencontrer un quelconque problème n'hésiter pas à contacter les gérants de ce repository
+Si vous rencontrez un quelconque problème, n'hésitez pas à contacter les gérants de ce repository.
 
 ## Requis
  - nodejs v12.19.0
