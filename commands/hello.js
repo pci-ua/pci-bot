@@ -1,16 +1,17 @@
+//Éxécution
 exports.run = (bot, message, args) => {
-    let liste = ['bonjour','bonsoir','salut','hello','hi','howdy'];
+	let liste = ['bonjour','bonsoir','salut','hello','hi','howdy'];
 	message.reply( liste[Math.floor(Math.random()*liste.length)] );
 }
 
-// Définition des aliase
+//alias
 exports.config = {
-    aliases: ["hi","hey","bonjour","bonsoir"]
+	aliases: ["hi","hey","bonjour","bonsoir"]
 };
 
-// Génération automatique de la commande help
+//Aide
 exports.help = {
-    name:"HELLO",
-    description:"Vous salue",
-    usage:"hello"
+	name:"HELLO",
+	description:"Vous salue.",
+	usage:"hello"
 }

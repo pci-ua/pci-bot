@@ -1,15 +1,16 @@
+//Éxécution
 exports.run = (bot, message, args) => {
-    message.reply( bot.message.invitation );
+	message.reply( bot.message.invitation );
 }
 
-// Définition des aliase
+//alias
 exports.config = {
-    aliases: ["inv"]
+	aliases: ["inv"]
 };
 
-// Génération automatique de la commande help
+//Aide
 exports.help = {
     name:"INVITATION",
-    description:"Vous retourne l'invitation pour rejoindre le discord",
+    description:"Vous retourne l'invitation pour rejoindre le discord.",
     usage:"invitation"
 }

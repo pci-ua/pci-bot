@@ -1,15 +1,16 @@
+//Éxécution
 exports.run = (bot, message, args) => {
-    message.channel.send("Pong");
+	message.channel.send("Pong");
 };
 
-// Définition des aliase
+//alias
 exports.config = {
-    aliases: ["pong", "pingpong"]
+	aliases: ["pong", "pingpong"]
 };
 
-// Génération automatique de la commande help
+//Aide
 exports.help = {
-    name:"PING",
-    description:"Renvoie pong",
-    usage:"ping"
+	name:"PING",
+	description:"Renvoie pong.",
+	usage:"ping"
 }

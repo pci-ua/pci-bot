@@ -1,11 +1,11 @@
 exports.run = async(bot ,data) => {
-    if(parseInt(data.message_id) == bot.ID_message_d_inscription) {
-        let serveur = bot.guilds.resolve( data.guild_id );
-        let membre = await serveur.members.fetch( data.user_id );
-        let roles = await serveur.roles.cache;
+	if(parseInt(data.message_id) == bot.ID_message_d_inscription) {
+		let serveur = bot.guilds.resolve( data.guild_id );
+		let membre = await serveur.members.fetch( data.user_id );
+		let roles = await serveur.roles.cache;
 		//rôle sans vérification
-        let index = bot.Accept_inscription.indexOf( data.emoji.name );
-        if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === bot.Accept_inscription[index]).id ); }
+		let index = bot.Accept_inscription.indexOf( data.emoji.name );
+		if( index != -1 ) { membre.roles.add( roles.find( x => x.name.replace(/ /ig,'') === bot.Accept_inscription[index]).id ); }
 		if( data.emoji.name == 'Mi' ) { membre.roles.add( roles.find( x => x.name === 'M2').id ); membre.roles.add( roles.find( x => x.name === 'M2-ID').id ); return;}
 		if( data.emoji.name == 'Ma' ) { membre.roles.add( roles.find( x => x.name === 'M2').id ); membre.roles.add( roles.find( x => x.name === 'M2-ACDI').id ); return;}
 		if( index != -1) { return; }
@@ -17,5 +17,5 @@ exports.run = async(bot ,data) => {
 			salon.send( message );
 			membre.send( `Votre demande va être traitée dans les plus bref délais par la modération merci de bien vouloir patienter cordialement.` );
 		}
-    }
+	}
 }

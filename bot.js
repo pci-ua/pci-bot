@@ -3,39 +3,40 @@
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
 * Authors contact : unknown, mathieu.toulon@free.fr
 * Release date : 25/10/2020
-* Version : 2.2.0
+* Last update : 02/12/2020
+* Version : 2.2.1
 ********************/
 
-//Librairies externe
+//Librairies externes
 const Discord = require('discord.js');
 const fs = require('fs');
 
-//Contenu séparé
+//Contenus séparés
 const Token = require('safety.js');
 const SuperLoger = require('superLog.js');
 
 //Initialisation du bot
 const bot = new Discord.Client();
 
-//Librairies interne
+//Librairies internes
 bot.discord = require('discord.js');
 bot.message = require('preMadeMessage.js');
 bot.club = require('clubManager.js');
 
-//Constante
-// à mettre dans un fichier JSON
-bot.prefix  = '?';
+//Constantes
+bot.prefix = '?';
 bot.pingRoleChannelId = '770040260415193108';
 bot.ID_message_d_inscription = 770255995091419176;
-bot.Verif_inscription = ['Doctorant','alu','ens'];
+bot.Verif_inscription = ['Doctorant','alu','ens','ext'];
 bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
 
+//Événements géré
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
 	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
 };
 
-//Variable global
+//Variables globales
 let connected = false;
 let lastCrash = 0;
 
@@ -46,12 +47,14 @@ bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 bot.events = new Discord.Collection();
 
+//On prépare les commandes chat du bot
 bot.loadCommands = () =>
 {
+	// - on vide les commandes et alias
 	bot.commands.clear();
 	bot.aliases.clear();
 
-	// On lit tout le dossier commands , un fichier correspond à une commande
+	// - pour chaque fichier du dossier 'commands' on créé une commande
 	fs.readdir("./commands/", (err, files) => {
 		if (err) return console.log(err);
 		files.forEach(file => {
@@ -74,11 +77,13 @@ bot.loadCommands = () =>
 	});
 }
 
+//On prépare les événements du bot
 bot.loadEvents = () =>
 {
+	// - on vide la liste des événements géré
 	bot.events.clear();
 
-	// Pareil que pour les commande, un fichier correspond à un event
+	// - pour chaque fichier du dossier 'events' on créé une capture d'un événement
 	fs.readdir('./events/', (err, files) => {
 		if (err) console.log(err);
 		files.forEach(file => {
@@ -90,13 +95,14 @@ bot.loadEvents = () =>
 	});
 }
 
-// Basic events handler
+// Quand le bot est correctement connecté
 bot.on('ready', ready => {
 	connected = true;
 	SuperLoger.log('Démarrer');
 	bot.user.setActivity('vos demandes: ' + bot.prefix + 'aide' , {'type': 'LISTENING'});
 });
 
+// Si bot ce fait déconnecté
 bot.on('disconnect', (errorMessage, code) => {
 	SuperLoger.log('Crash',errorMessage,code);
 	connected = false;
@@ -107,24 +113,25 @@ bot.on('disconnect', (errorMessage, code) => {
 	}
 });
 
+// Attrape tous les événements et transmet sous conditions
 bot.on('raw', async packet => {
-    //packet.t = type de packet
-    //packet.d = data du packet ( donnée )
-    if( events[ packet.t ] ) { //si on à définie l'évenement dans ceux à écouté
-        bot.emit( events[ packet.t ], packet.d );
-    }
+	//packet.t = type de packet
+	//packet.d = data du packet ( donnée )
+	if( events[ packet.t ] ) { //si on a définie l'évenement dans ceux à écouté
+		bot.emit( events[ packet.t ], packet.d );
+	}
 });
 
+// Lancement du bot
 function LogOn() {
-	// On charge les commandes et les events
 	bot.loadCommands();
 	bot.loadEvents();
 
 	bot.login(Token.get());
 }
-
 if( ! connected ) {
 	LogOn();
 }
 
+//Fonction annexe pour racourci
 function messageSurServeur( message ) { return message.guild !== null; }
