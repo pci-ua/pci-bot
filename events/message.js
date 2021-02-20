@@ -1,7 +1,7 @@
 exports.run = async(bot, message) => {
 	// On ignore les message des bots et ceux qui ne commencent pas par le prefix
 	if (message.author.bot) return;
-	
+
 	if (message.content.startsWith(bot.prefix)) {
 
 		// On met les arguments dans un tableau
@@ -11,7 +11,7 @@ exports.run = async(bot, message) => {
 
 		const command = bot.commands.get(cmd) || bot.aliases.get(cmd);
 
-		// Si une commande correpond à la commande trouver alors 
+		// Si une commande correpond à la commande trouver alors
 		if(command)
 			// On check si on peut executer la commande sur le serveur
 			if(command.config.guildOnly && message.guild === null)
@@ -22,5 +22,5 @@ exports.run = async(bot, message) => {
 			message.reply(bot.message.commandeInconnu);
 		else
 			;//on ignore juste les messages contenant juste le ?
-	}		  
+	}
 };

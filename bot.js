@@ -26,7 +26,7 @@ bot.club = require('clubManager.js');
 //Constantes
 bot.prefix = '?';
 bot.pingRoleChannelId = '770040260415193108';
-bot.ID_message_d_inscription = 770255995091419176;
+bot.ID_message_d_inscription = 808481264029401099;
 bot.Verif_inscription = ['Doctorant','alu','ens','ext'];
 bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
 
