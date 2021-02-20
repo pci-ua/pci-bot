@@ -24,7 +24,7 @@ exports.run = (bot, message, args) => {
 			if(command.help.description)
 				description += `__Description__ : ${command.help.description}\n`;
 			if(command.help.usage)
-				description +=  `__Usage__ : ${bot.prefix + command.help.usage}\n`;
+				description +=  `__Usage__ : ${bot.config.prefix + command.help.usage}\n`;
 			if(command.config.aliases)
 				description += '__Alias__ : ' + command.config.aliases.join(', ');
 

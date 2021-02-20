@@ -2,7 +2,7 @@ exports.run = async(bot, message) => {
 	// On ignore les message des bots et ceux qui ne commencent pas par le prefix
 	if (message.author.bot) return;
 
-	if (message.content.startsWith(bot.prefix)) {
+	if (message.content.startsWith(bot.config.prefix)) {
 
 		// On met les arguments dans un tableau
 		let messageArray = message.content.split(" "),

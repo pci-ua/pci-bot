@@ -24,21 +24,24 @@ bot.message = require('preMadeMessage.js');
 bot.club = require('clubManager.js');
 
 //Constantes
-bot.prefix = '?';
+bot.config = require('./config.json');
+/*bot.prefix = '?';
 bot.pingRoleChannelId = '770040260415193108';
 bot.ID_message_d_inscription = 808481264029401099;
 bot.Verif_inscription = ['Doctorant','alu','ens','ext'];
 bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
+bot.lastCrash = 0;
+bot.connected = false;
 
 //Événements géré
 const events = {
 	MESSAGE_REACTION_ADD: 'messageReactionAdd',
 	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
-};
+};*/
+
 
 //Variables globales
 let connected = false;
-let lastCrash = 0;
 
 bot.beginTimeStamp = new Date();
 
@@ -99,7 +102,7 @@ bot.loadEvents = () =>
 bot.on('ready', ready => {
 	connected = true;
 	SuperLoger.log('Démarrer');
-	bot.user.setActivity('vos demandes: ' + bot.prefix + 'aide' , {'type': 'LISTENING'});
+	bot.user.setActivity('vos demandes: ' + bot.config.prefix + 'aide' , {'type': 'LISTENING'});
 });
 
 // Si bot ce fait déconnecté
@@ -117,8 +120,8 @@ bot.on('disconnect', (errorMessage, code) => {
 bot.on('raw', async packet => {
 	//packet.t = type de packet
 	//packet.d = data du packet ( donnée )
-	if( events[ packet.t ] ) { //si on a définie l'évenement dans ceux à écouté
-		bot.emit( events[ packet.t ], packet.d );
+	if( bot.config.events[ packet.t ] ) { //si on a définie l'évenement dans ceux à écouté
+		bot.emit( bot.config.events[ packet.t ], packet.d );
 	}
 });
 
