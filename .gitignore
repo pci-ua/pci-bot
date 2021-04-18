@@ -1,5 +1,6 @@
 /node_modules/*
-!/node_modules/*.js
-/node_modules/safety.js
-/node_modules/discord.js
-data.log
+!/node_modules/clubManager.js
+!/node_modules/dice.js
+!/node_modules/preMadeMessage.js
+!/node_modules/superLog.js
+/data.log
