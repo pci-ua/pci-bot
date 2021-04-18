@@ -3,8 +3,8 @@
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
 * Authors contact : unknown, mathieu.toulon@free.fr
 * Release date : 25/10/2020
-* Last update : 02/12/2020
-* Version : 2.2.2
+* Last update : 19/04/2021
+* Version : 2.2.3
 ********************/
 
 //Librairies externes
@@ -25,20 +25,6 @@ bot.club = require('clubManager.js');
 
 //Constantes
 bot.config = require('./config.json');
-/*bot.prefix = '?';
-bot.pingRoleChannelId = '770040260415193108';
-bot.ID_message_d_inscription = 808481264029401099;
-bot.Verif_inscription = ['Doctorant','alu','ens','ext'];
-bot.Accept_inscription = ['L1','L2','L3','L3Pro','M1'];
-bot.lastCrash = 0;
-bot.connected = false;
-
-//Événements géré
-const events = {
-	MESSAGE_REACTION_ADD: 'messageReactionAdd',
-	MESSAGE_REACTION_REMOVE: 'messageReactionRemove',
-};*/
-
 
 //Variables globales
 let connected = false;

@@ -6,8 +6,8 @@
 	"Accept_inscription": ["L1","L2","L3","L3Pro","M1"],
 	"events":
 	{
-        	"MESSAGE_REACTION_ADD": "messageReactionAdd",
-        	"MESSAGE_REACTION_REMOVE": "messageReactionRemove"
+		"MESSAGE_REACTION_ADD": "messageReactionAdd",
+		"MESSAGE_REACTION_REMOVE": "messageReactionRemove"
 	}
 }
 
