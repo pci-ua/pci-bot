@@ -1,3 +1,5 @@
+const Message = require('../tools/message.js');
+
 var http = require('follow-redirects').http;
 var he = require('he');
 
@@ -39,15 +41,9 @@ exports.run = (bot, message, args) => {
        titre = he.decode(titre);
 
        // Création de l'embed
-       var embed = new bot.discord.MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle(titre)
-        .setThumbnail('https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png')
-        .setDescription('Source : [Les joies du code](https://lesjoiesducode.fr/)')
-        .setTimestamp()
-        .setFooter('Si vous avez un problème n\'hesitez pas à contacter le staff de PCi', 'https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png')
+       var embed = Message.embed( titre , 'Source : [Les joies du code](https://lesjoiesducode.fr/)')
         .setImage(path);
-        
+
         message.reply(embed);
     }).catch((error) => {
         console.log(error);

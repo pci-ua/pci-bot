@@ -1,3 +1,4 @@
+const Message = require('../tools/message.js');
 //Éxécution
 exports.run = async (bot, message, args) => {
 	//Récupère le serveur
@@ -5,13 +6,7 @@ exports.run = async (bot, message, args) => {
 
 
 	//Créé la template du message
-	let msg = new bot.discord.MessageEmbed()
-		.setColor('#0099ff')
-		.setTitle('Statistique de PC[i]')
-		.setThumbnail('https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png')
-		.setDescription('Voici quelques statistiques sur le serveur PC[i]')
-		.setTimestamp()
-		.setFooter('Si vous avez un problème n\'hesitez pas à contacter le staff de PCi', 'https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png');
+	let msg = Message.embed( 'Statistique de PC[i]' , 'Voici quelques statistiques sur le serveur PC[i]');
 
 
 	// on s'assure que tous les membres sont dans le cache serveur

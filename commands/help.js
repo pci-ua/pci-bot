@@ -1,5 +1,6 @@
 //Librairie
 const { DiscordAPIError } = require("discord.js");
+const Message = require('../tools/message.js');
 
 //Éxécution
 exports.run = (bot, message, args) => {
@@ -8,13 +9,7 @@ exports.run = (bot, message, args) => {
         	message.reply(bot.message.aideCourte);
 
 	//Création du message
-	let embed = new bot.discord.MessageEmbed()
-        	.setColor('#0099ff')
-        	.setTitle('Commande pour le PC[Bot]')
-        	.setThumbnail('https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png')
-        	.setDescription('Voici toutes les commandes qui sont disponibles')
-        	.setTimestamp()
-        	.setFooter('Si vous avez un problème n\'hesitez pas à contacter le staff de PCi', 'https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png');
+	let embed = Message.embed( 'Commande pour le PC[Bot]' , 'Voici toutes les commandes qui sont disponibles' );
 
 	//Ajout du contenu
 	bot.commands.each( command => {

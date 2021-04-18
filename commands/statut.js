@@ -1,6 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
+const Message = require('../tools/message.js');
 
 async function responseTime( WebSite ) {
 	const a = new Date();
@@ -19,16 +20,7 @@ let WebSiteList = [
 
 //Éxécution
 exports.run = async (bot, message, args) => {
-	let reponse = new bot.discord.MessageEmbed()
-                .setColor('#0099ff')
-                .setTitle("Statut des serveurs de l'université")
-                .setThumbnail('https://cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png')
-                .setDescription(`Voici l'état des serveurs de l'UA`)
-                .setTimestamp()
-                .setFooter(
-			'Si vous avez un problème n\'hesitez pas à contacter le staff de PCi',
-			'https://images-ext-2.discordapp.net/external/KY7Qkke32p9KvAzQLROmNQnbzZC0slzZWtdrvkm9frQ/https/cdn.discordapp.com/icons/672022288476143636/2fb81e0fcd9a3fb98932ff307b2dcf6d.png?width=80&height=80'
-		);
+	let reponse = Message.embed( "Statut des serveurs de l'université" ,`Voici l'état des serveurs de l'UA`);
 	message.reply('Récupération des informations...');
 	(await Promise.all(WebSiteList.map(responseTime))).map( etat => ({
 		name: `${etat.nom} [ ${etat.URL} ]`,
