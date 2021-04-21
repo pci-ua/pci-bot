@@ -1,7 +1,7 @@
 <div align="center">
 	<br/>
 	<p>
-		<a href="https://projetcohesion.info/"> <img src="./PCi_discord_qrcode.png" /> </a>
+		<a href="https://projetcohesion.info/"> <img src="https://projetcohesion.info/assets/icon.png" /> </a>
 	</p>
 </div>
 
