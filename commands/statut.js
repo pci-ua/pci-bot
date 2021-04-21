@@ -4,10 +4,14 @@ const fetch = require('node-fetch');
 const Message = require('../tools/message.js');
 
 async function responseTime( WebSite ) {
-	const a = new Date();
-	const response = await fetch( WebSite.URL );
-	const b = new Date();
-	return { URL : WebSite.URL , nom : WebSite.nom , delay : (response.timeout) ? null : (b - a) };
+	try {
+		const a = new Date();
+		const response = await fetch( WebSite.URL );
+		const b = new Date();
+		return { URL : WebSite.URL , nom : WebSite.nom , delay : (response.timeout) ? null : (b - a) };
+	} catch (e) {
+		return { URL : WebSite.URL , nom : WebSite.nom , delay : null };
+	}
 }
 
 let WebSiteList = [
