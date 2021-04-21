@@ -10,7 +10,7 @@ async function responseTime( WebSite ) {
 		const b = new Date();
 		return { URL : WebSite.URL , nom : WebSite.nom , delay : (response.timeout) ? null : (b - a) };
 	} catch (e) {
-		return { URL : WebSite.URL , nom : WebSite.nom , delay : null };
+		return { URL : WebSite.URL , nom : WebSite.nom , delay : null  , error : e };
 	}
 }
 
@@ -28,13 +28,18 @@ exports.run = async (bot, message, args) => {
 	message.reply('Récupération des informations...');
 	(await Promise.all(WebSiteList.map(responseTime))).map( etat => ({
 		name: `${etat.nom} [ ${etat.URL} ]`,
-		value: (etat.delay) ? (
-			(etat.delay < 200) ? `:green_circle: ${ etat.delay }ms` : (
-			(etat.delay < 500) ? `:yellow_circle: ${ etat.delay }ms` : (
-			(etat.delay < 1000)? `:orange_circle: ${ etat.delay }ms` : (
-			`:red_circle:  ${ etat.delay }ms`
-			) ) )
-		) :':black_circle: Timeout !'
+		value: (etat.error !== undefined )
+			?
+			( `:octagonal_sign: Timeout : ${etat.error}` )
+			:
+			(
+				(etat.delay) ? (
+				(etat.delay < 200) ? `:green_circle: ${ etat.delay }ms` : (
+				(etat.delay < 500) ? `:yellow_circle: ${ etat.delay }ms` : (
+				(etat.delay < 1000)? `:orange_circle: ${ etat.delay }ms` : (
+				`:red_circle:  ${ etat.delay }ms`
+				) ) ) ) : ':black_circle: Timeout !'
+			)
 	})).forEach( serveur => reponse.addField( serveur.name , serveur.value ) );
       	message.reply(reponse);
 };
