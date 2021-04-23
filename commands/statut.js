@@ -24,7 +24,7 @@ let WebSiteList = [
 
 //Éxécution
 exports.run = async (bot, message, args) => {
-	let reponse = Message.embed( "Statut des serveurs de l'université" ,`Voici l'état des serveurs de l'UA`);
+	let reponse = Message.embed( "Statut des serveurs de l'UA" ,`plus de détails au lien suivant http://supervision.univ-angers.fr/`);
 	message.reply('Récupération des informations...');
 	(await Promise.all(WebSiteList.map(responseTime))).map( etat => ({
 		name: `${etat.nom} [ ${etat.URL} ]`,
