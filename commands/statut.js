@@ -3,6 +3,7 @@
 const fetch = require('node-fetch');
 const Message = require('../tools/message.js');
 
+let timer = 0;
 async function responseTime( WebSite ) {
 	try {
 		const a = new Date();
@@ -24,6 +25,9 @@ let WebSiteList = [
 
 //Éxécution
 exports.run = async (bot, message, args) => {
+	const now = new Date();
+	if( now - timer < 60000 ) return message.reply( Message.embed( "Commande en cooldown veuillez patienter" , `Temps restants : ${(60000 - (now - timer))/1000}s` ) );
+	timer = now;
 	let reponse = Message.embed( "Statut des serveurs de l'UA" ,`plus de détails au lien suivant http://supervision.univ-angers.fr/`);
 	message.reply('Récupération des informations...');
 	(await Promise.all(WebSiteList.map(responseTime))).map( etat => ({
