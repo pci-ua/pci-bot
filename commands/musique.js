@@ -26,13 +26,26 @@ function musique_help( bot , msg , _ ) {
 	}
 }
 
-function musique_list( bot , msg , _ ) {
+async function musique_list( bot , msg , _ ) {
 	try {
 		const nmbListe = bot.musique.list.length;
 		if( bot.musique.playing && nmbListe > 0 ) {
 			let message = musique_msg( 'Liste' );
 			for(let i=0 ; i<Math.min( nmbListe , 12 ) ; i++) {
-				message.addField( i || 'Maintenant' , bot.musique.list[i] );
+				if( bot.musique.list[i].info == null ) {
+					let info = await ytdl.getInfo(bot.musique.list[i].link);
+					let Duree = info.videoDetails.lengthSeconds;
+					let Vue = info.videoDetails.viewCount;
+					let Released = info.videoDetails.publishDate;
+					bot.musique.list[i].info = '';
+`
+${info.videoDetails.title} - ${info.videoDetails.author.name}
+${bot.musique.list[i].link}
+${(Duree>3600)?(`${Math.floor(Duree/3600)}h`):``} ${(Duree>60)?(`${Math.floor(Duree/60)}:${Duree%60}`):`${Duree%60}s`} - ${Vue} vues - ${Released}
+`;
+
+				}
+				message.addField( i || 'Maintenant' , bot.musique.list[i].info );
 			}
 			msg.reply(message);
 		} else {
@@ -89,10 +102,10 @@ async function musique_play( bot , msg , args ) {
 				}
 			}
 			if( bot.musique.list.length == 0 ) {
-				bot.musique.list = [null,args];
+				bot.musique.list = [null, {'link':args,'info':null}];
 				musique_next( bot , msg , args );
 			} else {
-				bot.musique.list.push( args );
+				bot.musique.list.push( {'link':args,'info':null} );
 			}
 			msg.react('🎵');
 		} else {
@@ -109,7 +122,8 @@ function musique_next( bot , msg , _ ) {
 		if( bot.musique.playing ) {
 			bot.musique.list.shift();
 			if( bot.musique.list.length > 0 ) {
-				bot.musique.flux.play(ytdl(bot.musique.list[0], { filter: 'audioonly' }))
+				console.log(bot.musique.list[0]);
+				bot.musique.flux.play(ytdl(bot.musique.list[0].link, { filter: 'audioonly' }))
 					.on('finish', _ => musique_next( bot , null , null ) )
 					.on('error',console.error)
 				;
