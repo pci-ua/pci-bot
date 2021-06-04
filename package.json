@@ -7,6 +7,10 @@
 		"Mathieu TOULON (aka StrategeFirst)",
 		"Mathew (aka appolomelon)"
 	],
+	"scripts": {
+		"test": "echo \"No test command has been set yet ! \" && exit 1",
+		"start": "nodejs bot.js"
+	},
 	"dependencies": {
 		"@discordjs/opus": "^0.5.0",
 		"discord.js": "^12.5.1",
