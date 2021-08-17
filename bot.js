@@ -12,16 +12,16 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 //Contenus séparés
-const Token = require('safety.js');
-const SuperLoger = require('superLog.js');
+const Token = require('./safety.js');
+const SuperLoger = require('./superLog.js');
 
 //Initialisation du bot
 const bot = new Discord.Client();
 
 //Librairies internes
 bot.discord = require('discord.js');
-bot.message = require('preMadeMessage.js');
-bot.club = require('clubManager.js');
+bot.message = require('./preMadeMessage.js');
+bot.club = require('./clubManager.js');
 
 //Constantes
 bot.config = require('./config.json');
