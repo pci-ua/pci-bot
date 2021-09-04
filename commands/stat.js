@@ -42,7 +42,8 @@ exports.run = async (bot, message, args) => {
 
 //alias
 exports.config = {
-	aliases: ["stats"]
+	aliases: ["stats"],
+	guildOnly: true
 };
 
 //Aide
