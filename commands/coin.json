@@ -1,0 +1,12 @@
+{
+	"name": "coin",
+	"description": "Vous retourne le nombre de PCi-coin (à votre disposition par défaut)",
+	"options": [
+		{
+			"name": "who",
+			"description": "Changement de cible, (par défaut vous)",
+			"type": 6,
+			"required": false
+		}
+	]
+}

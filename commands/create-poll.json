@@ -1,0 +1,29 @@
+{
+	"name": "create-poll",
+	"description": "Créer un sondage",
+	"options": [
+		{
+			"name": "question",
+			"description": "Votre question",
+			"type": 3,
+			"required": true
+		},
+		{ "name": "reponse1", "description": "premiere réponse", "required": true, "type": 3 },
+		{ "name": "reponse2", "description": "seconde réponse", "required": true, "type": 3 },
+		{ "name": "reponse3", "description": "4ème réponse (optionnelle)", "required": false, "type": 3 },
+		{ "name": "reponse4", "description": "5ème réponse (optionnelle)", "required": false, "type": 3 },
+		{ "name": "reponse5", "description": "6ème réponse (optionnelle)", "required": false, "type": 3 },
+		{
+			"name": "officiel",
+			"description": "( Si défini à vrai le vote ne coutera pas de coin et sera unique )",
+			"type": 5,
+			"required": false
+		},
+		{
+			"name": "masquer",
+			"description": "( Si défini à vrai le vote sera secret jusqu'à sa fin )",
+			"type": 5,
+			"required": false
+		}
+	]
+}

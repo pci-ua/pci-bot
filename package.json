@@ -1,0 +1,32 @@
+{
+  "name": "pci_communybot",
+  "version": "0.0.0",
+  "description": "Robot Discord pour la communauté PCi avec des sondages et des points de communauté",
+  "main": "server.js",
+  "scripts": {
+    "dev": "mkdir -p data && export ENV=dev && nodemon server.js",
+    "start": "echo \"NOT TO DO YET, protection triggerd ! \" && exit 1 && export ENV=prod && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "PCi",
+    "communauté",
+    "sondages"
+  ],
+  "author": "Mathieu TOULON ( @StrategFirst )",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "canvas": "^2.8.0",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "mysql2": "^2.3.2",
+    "nodemon": "^2.0.14",
+    "sequelize": "^6.6.5",
+    "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.3"
+  }
+}

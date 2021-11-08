@@ -1,0 +1,8 @@
+# Dependencies folder
+/node_modules
+
+# Data folder
+/data
+
+# Environement variable
+.env

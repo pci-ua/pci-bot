@@ -1,0 +1,12 @@
+{
+	"name": "end-poll",
+	"description": "Participe à un sondage",
+	"options": [
+		{
+			"name": "idsondage",
+			"description": "ID du sondage",
+			"type": 3,
+			"required": true
+		}
+	]
+}
