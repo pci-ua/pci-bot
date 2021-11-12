@@ -4,7 +4,7 @@
   "description": "Robot Discord pour la communauté PCi avec des sondages et des points de communauté",
   "main": "server.js",
   "scripts": {
-    "dev": "mkdir -p data && export ENV=dev && nodemon server.js",
+    "dev": "mkdir -p data backup && export ENV=dev && nodemon server.js",
     "start": "echo \"NOT TO DO YET, protection triggerd ! \" && exit 1 && export ENV=prod && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
