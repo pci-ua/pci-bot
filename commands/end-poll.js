@@ -17,7 +17,7 @@ async function main(interaction,bot) {
 
 		const suffrageTotalExprime = sondage.answer.reduce( (acc,current) => acc + current.length , 0 );
 		if( suffrageTotalExprime == 0 ) {
-			await sondageReponse.editReply({ content: 'Sondage close, aucun participant ! ;('});
+			await interaction.editReply({ content: 'Sondage close, aucun participant ! ;('});
 		} else {
 			// Création
 			const canvas = createCanvas(600, sondage.reponses.length * 50 );
