@@ -1,3 +1,5 @@
+const { isPCiMember } = require('../middleware/user.js');
+
 let symbol = null;
 
 async function main(interaction,bot) {
@@ -9,8 +11,9 @@ async function main(interaction,bot) {
 			else {
 				if( row != undefined ) resolve( row.amount );
 				else {
-					process.db.run(`INSERT INTO pcicoin VALUES ('${target.id}',0)`);
-					resolve( 0 );
+					const amount = isPCiMember( target ) ? 1000 : 0;
+					process.db.run(`INSERT INTO pcicoin VALUES ('${target.id}',${amount})`);
+					resolve( amount );
 				}
 			}
 		});
