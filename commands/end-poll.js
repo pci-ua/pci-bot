@@ -1,6 +1,8 @@
-const { createCanvas } = require('canvas');
+const { createCanvas, registerFont } = require('canvas');
 const { writeFileSync } = require('fs');
 const { isMemberBotAdmin } = require('../middleware/user.js');
+
+registerFont('NotoSansDisplay.ttf', { family: 'NotoSansDisplay' }); //https://fonts.google.com/noto/specimen/Noto+Sans+Display
 
 async function main(interaction,bot) {
 
@@ -20,7 +22,7 @@ async function main(interaction,bot) {
 			await interaction.editReply({ content: 'Sondage close, aucun participant ! ;('});
 		} else {
 			// Création
-			const canvas = createCanvas(600, sondage.reponses.length * 50 );
+			const canvas = createCanvas(650, sondage.reponses.length * 50 );
 			const dessin = canvas.getContext('2d');
 
 			// Initialisation
@@ -44,11 +46,11 @@ async function main(interaction,bot) {
 				}
 				// Texte résultat
 				dessin.fillStyle = 'white';
-				dessin.font = '20px "monospace"';
+				dessin.font = '24px "arial"';
 				dessin.fillText(`${ sondage.answer[ i ].length } (${ Math.round( suffragePourI *10000 )/100}%)` , 500 , (i+1)*50 - 25);
 				// Texte réponse
 				dessin.fillStyle = 'white';
-				dessin.font = '16px "monospace"';
+				dessin.font = '20px "arial"';
 				dessin.fillText( max20char(sondage.reponses[i]) , 10 , (i+1)*50 - 25);
 			}
 
