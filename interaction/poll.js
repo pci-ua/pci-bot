@@ -12,7 +12,7 @@ async function main(interaction,bot) {
 			await interaction.reply( {content: `Vous avez déjà répondu pour : ${interaction.message.content}`,ephemeral:true} );
 		}
 	} else {
-		await interaction.reply( {content: `Sondage clos ou inexistant !`} );
+		await interaction.reply( {content: `Sondage clos ou inexistant !`, ephemeral:true} );
 	}
 }
 
