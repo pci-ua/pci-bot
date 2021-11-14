@@ -36,7 +36,7 @@ async function main(interaction,bot) {
 				let suffragePourI = sondage.answer[ i ].length / suffrageTotalExprime;
 				// Barre résultat
 				dessin.strokeStyle = '#242424';
-				dessin.strokeRect( 220 + suffragePourI*100 , i*50 + 10 , (1-suffragePourI)*250 , 10 );
+				dessin.strokeRect( 220 + suffragePourI*250 , i*50 + 10 , (1-suffragePourI)*250 , 10 );
 				if( suffragePourI > 0 ) {
 					if( suffragePourI > 0.5 )
 						dessin.strokeStyle = 'gold';
