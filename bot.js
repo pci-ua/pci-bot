@@ -3,20 +3,20 @@
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
 * Authors contact : unknown, mathieu.toulon@free.fr
 * Release date : 25/10/2020
-* Last update : 19/04/2021
-* Version : 2.2.3
+* Last update : 24/11/2021
+* Version : 3.0.0
 ********************/
 
 //Librairies externes
-const Discord = require('discord.js');
-const fs = require('fs');
+const { Client, Intents, Collection } = require('discord.js');
+const { readdir } = require('fs');
 
 //Contenus séparés
 const Token = require('./safety.js');
 const SuperLoger = require('./superLog.js');
 
 //Initialisation du bot
-const bot = new Discord.Client();
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 //Librairies internes
 bot.discord = require('discord.js');
@@ -32,39 +32,9 @@ let connected = false;
 bot.beginTimeStamp = new Date();
 
 // On stock les commandes , les aliases et les events dans des Collections
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
-bot.events = new Discord.Collection();
+bot.events = new Collection();
 
 //On prépare les commandes chat du bot
-bot.loadCommands = () =>
-{
-	// - on vide les commandes et alias
-	bot.commands.clear();
-	bot.aliases.clear();
-
-	// - pour chaque fichier du dossier 'commands' on créé une commande
-	fs.readdir("./commands/", (err, files) => {
-		if (err) return console.log(err);
-		files.forEach(file => {
-			if (!file.endsWith(".js")) return;
-			delete require.cache[require.resolve(`./commands/${file}`)];
-			let props = require(`./commands/${file}`);
-			let commandName = file.split(".")[0];
-			bot.commands.set(commandName, props);
-
-			if(props.config)
-			{
-				if(props.config.aliases)
-				{
-					props.config.aliases.forEach(alias => {
-						bot.aliases.set(alias, props);
-					});
-				}
-			}
-		});
-	});
-}
 
 //On prépare les événements du bot
 bot.loadEvents = () =>
@@ -73,7 +43,7 @@ bot.loadEvents = () =>
 	bot.events.clear();
 
 	// - pour chaque fichier du dossier 'events' on créé une capture d'un événement
-	fs.readdir('./events/', (err, files) => {
+	readdir('./events/', (err, files) => {
 		if (err) console.log(err);
 		files.forEach(file => {
 			delete require.cache[require.resolve(`./events/${file}`)];
@@ -125,3 +95,14 @@ if( ! connected ) {
 
 //Fonction annexe pour racourci
 function messageSurServeur( message ) { return message.guild !== null; }
+
+
+bot.on('interactionCreate', interaction => {
+	switch (interaction.type) {
+		case 'APPLICATION_COMMAND': require('./command/')( interaction );
+
+			break;
+		default:
+			console.warn( `unknown interaction type : ${interaction.type}! ` );
+	}
+}
