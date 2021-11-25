@@ -1,9 +1,14 @@
-const Message = require('../tools/message.js');
-//Éxécution
-exports.run = async (bot, message, args) => {
-	//Récupère le serveur
-	let serveur = message.guild;
+'use strict';
+const DATA = require('./data.json');
 
+const Message = require('../tools/message.js');
+
+//Éxécution
+exports = async ( interaction ) => {
+	//Récupère le serveur
+	let serveur = interaction.guild;
+
+	interaction.reply({ content: DATA.chargement });
 
 	//Créé la template du message
 	let msg = Message.embed( 'Statistique de PC[i]' , 'Voici quelques statistiques sur le serveur PC[i]');
@@ -28,7 +33,7 @@ exports.run = async (bot, message, args) => {
 		['L1','L2','L3','L3 Pro','M1','M2','Doctorant','Enseignant']
 			.map( R => ` ► ${serveur.roles.cache.find( e => e.name === R ).members.size} ${R}` )
 			.join('\n');
-	const msg_bot = `uptime : ${ getDurationString( (new Date()) - bot.beginTimeStamp ) }`;
+	const msg_bot = `uptime : ${ getDurationString( (new Date()) - process.beginTimeStamp ) }`;
 
 
 	//Ajout
@@ -37,21 +42,9 @@ exports.run = async (bot, message, args) => {
 	msg.addField('à venir', "d'autres statistiques vont bientôt être disponibles!!!");
 
 	//Envoie
-	message.reply(msg);
+	interaction.editReply({content:DATA.resultat,embeds:[msg]});
 }
 
-//alias
-exports.config = {
-	aliases: ["stats"],
-	guildOnly: true
-};
-
-//Aide
-exports.help = {
-	name:"STAT",
-	description:"Vous renvoie certaines statistiques",
-	usage:"stat"
-}
 
 //Factorisation
 function getDurationString(duration) {

@@ -29,7 +29,7 @@ bot.config = require('./config.json');
 //Variables globales
 let connected = false;
 
-bot.beginTimeStamp = new Date();
+process.beginTimeStamp = new Date();
 
 // On stock les commandes , les aliases et les events dans des Collections
 bot.events = new Collection();
