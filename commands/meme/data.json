@@ -1,0 +1,9 @@
+{
+	"reponse": {
+		"chargement": "Récupération du meme en cours veuillez patienter ⏳",
+		"resultat": "Même obtenu : ",
+		"inaccessible": "Impossible de récupéré un même 😞, lesjoiesducode.fr doivent être down!"
+		"srcText": "Source : [Les joies du code](https://lesjoiesducode.fr/)"
+	},
+	"url": "https://lesjoiesducode.fr/"
+}

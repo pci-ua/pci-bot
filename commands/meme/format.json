@@ -1,0 +1,4 @@
+{
+	"name": "meme",
+	"description": "Renvoie un meme random basée sur le site [Les joies du code](https://lesjoiesducode.fr/)"
+}
