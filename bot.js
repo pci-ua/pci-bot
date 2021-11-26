@@ -59,7 +59,6 @@ bot.on('ready', ready => {
 	connected = true;
 	SuperLoger.log('Démarrer');
 	bot.user.setActivity('vos demandes: ' + bot.config.prefix + 'aide' , {'type': 'LISTENING'});
-	for(let command of bot.commands) (command[1].init) ? (command[1].init(bot)) : '';
 });
 
 // Si bot ce fait déconnecté
@@ -96,7 +95,7 @@ if( ! connected ) {
 //Fonction annexe pour racourci
 function messageSurServeur( message ) { return message.guild !== null; }
 
-
+// SlashCommands, ButtonInteraction, ...
 bot.on('interactionCreate', interaction => {
 	switch (interaction.type) {
 		case 'APPLICATION_COMMAND': require('./command/')( interaction );
