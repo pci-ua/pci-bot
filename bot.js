@@ -13,15 +13,12 @@ const { readdir } = require('fs');
 
 //Contenus séparés
 const Token = require('./safety.js');
-const SuperLoger = require('./superLog.js');
 
 //Initialisation du bot
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 //Librairies internes
 bot.discord = require('discord.js');
-bot.message = require('./preMadeMessage.js');
-bot.club = require('./clubManager.js');
 
 //Constantes
 bot.config = require('./config.json');
@@ -57,13 +54,13 @@ bot.loadEvents = () =>
 // Quand le bot est correctement connecté
 bot.on('ready', ready => {
 	connected = true;
-	SuperLoger.log('Démarrer');
+	console.log('bot ready');
 	bot.user.setActivity('vos demandes: ' + bot.config.prefix + 'aide' , {'type': 'LISTENING'});
 });
 
 // Si bot ce fait déconnecté
 bot.on('disconnect', (errorMessage, code) => {
-	SuperLoger.log('Crash',errorMessage,code);
+	console.error('bot disconnected :',errorMessage,code);
 	connected = false;
 
 	let now = new Date();
@@ -83,7 +80,6 @@ bot.on('raw', async packet => {
 
 // Lancement du bot
 function LogOn() {
-	bot.loadCommands();
 	bot.loadEvents();
 
 	bot.login(Token.get());
@@ -104,4 +100,4 @@ bot.on('interactionCreate', interaction => {
 		default:
 			console.warn( `unknown interaction type : ${interaction.type}! ` );
 	}
-}
+} );
