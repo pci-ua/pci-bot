@@ -11,6 +11,9 @@
 const { Client, Intents, Collection } = require('discord.js');
 const { readdir } = require('fs');
 
+// Ajout fonction custom :
+require('./custom/');
+
 //Contenus séparés
 const Token = require('./safety.js');
 
@@ -56,6 +59,7 @@ bot.on('ready', ready => {
 	connected = true;
 	console.log('bot ready');
 	bot.user.setActivity('vos demandes: ' + bot.config.prefix + 'aide' , {'type': 'LISTENING'});
+	require('./commands/update');
 });
 
 // Si bot ce fait déconnecté

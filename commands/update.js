@@ -19,8 +19,8 @@ new Promise( (resolve, reject) => {
 // <2> Envoie à Discord des formats
 .then( listeFichier => rest.put(
 	Routes.applicationGuildCommands(
-		/* TODO PC[bot] app ID */,
-		/* TODO PC[i] server ID */
+		/* PC[bot] app ID */ 355029819249000459,
+		/* PC[i] server ID */ 672022288476143636
 	),
 	{
 		body: liste
