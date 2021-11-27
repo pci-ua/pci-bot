@@ -3,7 +3,7 @@ const { readdir } = require('fs');
 // Mise à jours des SlashCommands
 // <1> Récupération contenu dossier
 new Promise( (resolve, reject) => {
-	readdir( ('./') , {} , (err,liste) => {
+	readdir( ('./custom') , {} , (err,liste) => {
 		if( err ) {
 			reject( err );
 		} else {

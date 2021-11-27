@@ -1,14 +1,14 @@
 const { readdir } = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const Token = require('./safety.js');
+const Token = require('../safety.js');
 
 const rest = new REST({ version: '9' }).setToken( Token.get() );
 
 // Mise à jours des SlashCommands
 // <1> Récupération contenu dossier
 new Promise( (resolve, reject) => {
-	readdir( ('./') , {} , (err,liste) => {
+	readdir( ('./commands/') , {} , (err,liste) => {
 		if( err ) {
 			reject( err );
 		} else {
@@ -19,11 +19,11 @@ new Promise( (resolve, reject) => {
 // <2> Envoie à Discord des formats
 .then( listeFichier => rest.put(
 	Routes.applicationGuildCommands(
-		/* PC[bot] app ID */ 355029819249000459,
-		/* PC[i] server ID */ 672022288476143636
+		/* PC[bot] app ID */ '355029819249000459',
+		/* PC[i] server ID */ '672022288476143636'
 	),
 	{
-		body: liste
+		body: listeFichier
 			.filter( folderName => folderName.match( /^([0-9a-z_]+)$/ ) )
 			.map( folderName => require(`./${folderName}/format.json`) )
 	}

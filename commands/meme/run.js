@@ -1,17 +1,18 @@
 'use strict';
 const DATA = require('./data.json');
 
-const Message = require('../tools/message.js');
+const Message = require('../../tools/message.js');
 const fetch = require('node-fetch');
 
-exports.run = async ( interaction ) => {
+module.exports = async ( interaction ) => {
 
 	await interaction.reply({content : DATA.reponse.chargement });
-    const regexTitre = /<h1 class="blog-post-title single-blog-post-title">(.*?)<\/h1>/;
-    const regexGif = /https:\/\/lesjoiesducode\.fr\/content\/([^\/]+)\/([^\.]+)\.gif/
+	const regexTitre = /<h1\ class="blog-post-title\ single-blog-post-title">(.*?)<\/h1>/;
+	const regexGif = /https:\/\/lesjoiesducode\.fr\/content\/([^\/]+)\/([^\.]+)\.gif/;
 
+	let page;
 	try {
-		const page = await fetch(DATA.url).then( response => response.text() );
+		page = await fetch(DATA.url).then( response => response.text() );
 	} catch ( err ) {
 		return await interaction.editReply({content : DATA.reponse.inaccessible});
 	}
@@ -20,8 +21,8 @@ exports.run = async ( interaction ) => {
 	const memeTitle = page.match( regexTitre )[1];
 
 	const embed = Message.embed( memeTitle , DATA.reponse.srcText )
-		.attachFiles([ memeGifURL ])
+		.setImage( memeGifURL )
 
 	await interaction.editReply({content : DATA.reponse.resultat, embeds:[embed]});
-	
+
 }

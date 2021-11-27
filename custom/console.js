@@ -20,8 +20,8 @@ console = { old };
 allOldName.forEach( oldName => console[oldName] = notDoneYet(oldName) );
 
 console.clear = () => { console.old.clear(); }
-console.debug = (...k) => { console.debug('\u001b[38;2;255;255;255m','🐛',nowToLogString(),...k, '\033[0m'); }
-console.error = (...k) => { console.error('\u001b[38;2;255;020;020m','❌',nowToLogString(),...k, '\033[0m'); }
-console.info  = (...k) => { console.info ('\u001b[38;2;255;225;110m','🛈', nowToLogString(),...k, '\033[0m'); }
-console.warn  = (...k) => { console.warn ('\u001b[38;2;255;200;000m','⚠', nowToLogString(),...k, '\033[0m'); }
-console.log   = (...k) => { console.log  ('\u001b[38;2;150;255;240m','📜',nowToLogString(),...k, '\033[0m'); }
+console.debug = (...k) => { console.old.debug('\u001b[38;2;255;255;255m','🐛',nowToLogString(),...k, '\033[0m'); }
+console.error = (...k) => { console.old.error('\u001b[38;2;255;020;020m','❌',nowToLogString(),...k, '\033[0m'); }
+console.info  = (...k) => { console.old.info ('\u001b[38;2;255;225;110m','🛈' ,nowToLogString(),...k, '\033[0m'); }
+console.warn  = (...k) => { console.old.warn ('\u001b[38;2;255;200;000m','⚠', nowToLogString(),...k, '\033[0m'); }
+console.log   = (...k) => { console.old.log  ('\u001b[38;2;150;255;240m','📜',nowToLogString(),...k, '\033[0m'); }

@@ -27,22 +27,23 @@ function traitementData( reponse ) {
 		info.value = `:octagonal_sign: Timeout | Erreur : ${reponse.error}`
 	} else {
 		switch (true) {
-			case (etat.delay < 200) :
-				info.value = `:green_circle: ${ etat.delay }ms`;
+			case (reponse.delay < 200) :
+				info.value = `:green_circle: ${ reponse.delay }ms`;
 				break;
-			case (etat.delay < 500) :
-				info.value = `:yellow_circle: ${ etat.delay }ms`;
+			case (reponse.delay < 500) :
+				info.value = `:yellow_circle: ${ reponse.delay }ms`;
 				break;
-			case (etat.delay < 1000) :
-				info.value = `:orange_circle: ${ etat.delay }ms`;
+			case (reponse.delay < 1000) :
+				info.value = `:orange_circle: ${ reponse.delay }ms`;
 				break;
-			case (etat.delay >= 1000) :
-				info.value = `:red_circle: ${ etat.delay }ms`;
+			case (reponse.delay >= 1000) :
+				info.value = `:red_circle: ${ reponse.delay }ms`;
 				break;
 			default:
 				info.value = ':black_circle: Timeout !';
 		}
 	}
+	return info;
 }
 
 //Éxécution
@@ -57,7 +58,7 @@ module.exports = async ( interaction ) => {
 		await interaction.editReply( {content:`${DATA.reponse.cooldown} ${remainingSeconds}s`} );
 	} else {
 		// éxécution donc mise à jour du cooldown
-		timer = now;
+		cooldown_timer = now;
 
 		let reponse = Message.embed( "Statut des serveurs de l'UA" ,`Page statut UA http://supervision.univ-angers.fr/ (pas très très précises)`);
 

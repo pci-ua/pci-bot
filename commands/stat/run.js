@@ -1,14 +1,14 @@
 'use strict';
 const DATA = require('./data.json');
 
-const Message = require('../tools/message.js');
+const Message = require('../../tools/message.js');
 
 //Éxécution
-exports = async ( interaction ) => {
+module.exports = async ( interaction ) => {
 	//Récupère le serveur
 	let serveur = interaction.guild;
 
-	interaction.reply({ content: DATA.chargement });
+	interaction.reply({ content: DATA.reponse.chargement });
 
 	//Créé la template du message
 	let msg = Message.embed( 'Statistique de PC[i]' , 'Voici quelques statistiques sur le serveur PC[i]');
@@ -42,7 +42,7 @@ exports = async ( interaction ) => {
 	msg.addField('à venir', "d'autres statistiques vont bientôt être disponibles!!!");
 
 	//Envoie
-	interaction.editReply({content:DATA.resultat,embeds:[msg]});
+	interaction.editReply({content:DATA.reponse.resultat,embeds:[msg]});
 }
 
 

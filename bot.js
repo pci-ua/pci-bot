@@ -98,7 +98,7 @@ function messageSurServeur( message ) { return message.guild !== null; }
 // SlashCommands, ButtonInteraction, ...
 bot.on('interactionCreate', interaction => {
 	switch (interaction.type) {
-		case 'APPLICATION_COMMAND': require('./command/')( interaction );
+		case 'APPLICATION_COMMAND': require('./commands/')( interaction );
 
 			break;
 		default:
