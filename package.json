@@ -9,14 +9,15 @@
 	],
 	"scripts": {
 		"test": "echo \"No test command has been set yet ! \" && exit 1",
-		"start": "nodejs bot.js"
+		"start": "nodemon bot.js"
 	},
 	"dependencies": {
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"discord-api-types": "^0.24.0",
 		"discord.js": "^13.1.0",
 		"node-fetch": "^2.6.1",
-		"nodejs": "0.0.0"
+		"nodejs": "0.0.0",
+		"nodemon": "^2.0.15"
 	},
 	"repository": "./",
 	"license": "unknown",
