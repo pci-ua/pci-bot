@@ -1,0 +1,57 @@
+{
+	"name": "sub",
+	"description": "Gère les souscriptions aux rôles annexes",
+	"options": [
+		{
+			"type": 1,
+			"name": "list",
+			"description": "Vous retourne la liste des rôles annexes disponible."
+		},
+		{
+			"type": 1,
+			"name": "add",
+			"description": "Vous ajoute un rôle",
+			"options": [{
+				"name": "role",
+				"description": "le rôle que vous souhaitez vous ajoutez",
+				"required": true,
+				"type": 3,
+				"choices": []
+			}]
+		},
+		{
+			"type": 1,
+			"name": "remove",
+			"description": "Vous retire un rôle",
+			"options": [{
+				"name": "role",
+				"description": "le rôle que vous souhaitez vous retirez",
+				"required": true,
+				"type": 3,
+				"choices": []
+			}]
+		},
+		{
+			"type": 1,
+			"name": "create",
+			"description": "Créé un rôle annexe",
+			"options": [{
+				"name": "role",
+				"description": "le rôle que vous souhaitez vous ajoutez",
+				"required": true,
+				"type": 3
+			}]
+		},
+		{
+			"type": 1,
+			"name": "delete",
+			"description": "Vous retire un rôle",
+			"options": [{
+				"name": "role",
+				"description": "le rôle que vous souhaitez vous ajoutez",
+				"required": true,
+				"type": 3
+			}]
+		}
+	]
+}

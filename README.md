@@ -9,21 +9,37 @@
 
 ## Table des matières
  - [À propos](#À)
- - [Exemple d'utilisation](#exemple)
+ - [Installation](#Installation)
  - [contribution](#contribuer)
  - [aide](#aide)
- - [Installation et éxécution](#Installation)
 
 ## À propos
 
 PC\[bot\] est un robot de gestion du discord de PC\[i\]
 
 
-## Exemple d'utilisation
+## Installation
 
-`?aide`
+Prérequis :
+ - NodeJS : min `v16.0.0` recommandé `v16.13.0`
+ - npm : min `v8.0.0` recommandé `v8.1.0`
 
-`?roll 1d6`
+Une fois ces pré-requis satisfait :
+``` bash
+git clone https://github.com/pci-ua/pci-bot.git
+cd pci-bot
+npm ci
+```
+
+Une fois installer il vous faudra juste mettre en place le token, pour cela copier le fichier `safety.js.example` en `safety.js` et inséré votre token à la place du placeholder.
+Vous pourrez aussi éditer les différentes config disponibles dans le fichier `config.json`
+
+Pour lancer le bot : 
+```bash
+npm run dev
+# ou /\ dev mode | prod mode \/
+npm run start
+```
 
 ## Contribution
 
@@ -34,24 +50,3 @@ Vous êtes libres de contribuer à ce projet, mais vérifiez tout de même ces q
 ## Aide
 
 Si vous rencontrez un quelconque problème, n'hésitez pas à contacter les gérants de ce repository.
-
-## Installation & Execution
-### Installation
-##### 1 : Installation global
-`sudo apt update`
-`sudo apt upgrade`
-`sudo apt install npm`
-`sudo apt install nodejs`
-##### 2 : Vérification
-`npm -v`
-Doit être au minimum en 7.16.0
-`node -v`
-Doit être au minimum en 15.14.0
-##### 3 : Installation projet
-`git clone https://github.com/pci-ua/pci-bot.git`
-`cd pci-bot`
-`npm i`
-### Execution
-`npm start`
-
-

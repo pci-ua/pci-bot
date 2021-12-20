@@ -1,0 +1,41 @@
+{
+	"listeServeurUA": [
+		{
+		  "URL" : "https://ent.univ-angers.fr/",
+		  "nom" : "ENT"
+		},
+
+		{
+		  "URL" : "https://moodle.univ-angers.fr/",
+		  "nom" : "Moodle"
+		},
+
+		{
+		  "URL" : "https://zimbra.univ-angers.fr/",
+		  "nom" : "Zimbra"
+		},
+
+		{
+			"URL" : "https://leria-etud.univ-angers.fr/",
+			"nom" : "Starwars"
+		},
+		
+		{
+		  "URL" : "http://devel.info.univ-angers.fr/",
+		  "nom" : "Devel (deprecated)"
+		},
+
+		{
+		  "URL" : "http://forge.info.univ-angers.fr/",
+		  "nom" : "Forge (deprecated)"
+		}
+	],
+
+	"reponse": {
+		"chargement": "Récupération des données en cours veuillez patienter ⏳",
+		"resultat": "Voici les données récupérées : ",
+		"cooldown": "Commande en cooldown veuillez patienter ! ⏳ : "
+	},
+
+	"cooldown_ms": 60000
+}

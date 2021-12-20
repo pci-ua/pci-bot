@@ -1,0 +1,24 @@
+{
+	"name": "roll",
+	"description": "Lance un dé",
+	"options": [
+		{
+			"name": "nb_face",
+			"description": "Nombre de face du dé (default: 6,min: 2, max: 9999)",
+			"type": 4,
+			"required": false
+		},
+		{
+			"name": "nb_tirage",
+			"description": "Nombre de lancer du dé (default: 1,min: 1, max: 100)",
+			"type": 4,
+			"required": false
+		},
+		{
+			"name": "modifier",
+			"description": "Montant à ajouté à chaque dé (positif ou négatif) (default: 0)",
+			"type": 4,
+			"required": false
+		}
+	]
+}
