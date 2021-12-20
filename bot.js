@@ -19,6 +19,8 @@ const { Client, Intents } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const Token = require('./safety.js');
 
+process.bot = bot;
+
 bot.discord = require('discord.js');
 bot.config = require('./config.json');
 bot.events = require('./events');
