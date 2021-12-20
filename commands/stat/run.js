@@ -8,7 +8,7 @@ module.exports = async ( interaction ) => {
 	//Récupère le serveur
 	let serveur = interaction.guild;
 
-	interaction.reply({ content: DATA.reponse.chargement });
+	await interaction.reply({ content: DATA.reponse.chargement });
 
 	//Créé la template du message
 	let msg = Message.embed( 'Statistique de PC[i]' , 'Voici quelques statistiques sur le serveur PC[i]');
@@ -42,7 +42,7 @@ module.exports = async ( interaction ) => {
 	msg.addField('à venir', "d'autres statistiques vont bientôt être disponibles!!!");
 
 	//Envoie
-	interaction.editReply({content:DATA.reponse.resultat,embeds:[msg]});
+	await interaction.editReply({content:DATA.reponse.resultat,embeds:[msg]});
 }
 
 
