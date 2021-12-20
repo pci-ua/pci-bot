@@ -16,13 +16,18 @@
 		},
 
 		{
+			"URL" : "https://leria-etud.univ-angers.fr/",
+			"nom" : "Starwars"
+		},
+		
+		{
 		  "URL" : "http://devel.info.univ-angers.fr/",
-		  "nom" : "Devel"
+		  "nom" : "Devel (deprecated)"
 		},
 
 		{
 		  "URL" : "http://forge.info.univ-angers.fr/",
-		  "nom" : "Forge"
+		  "nom" : "Forge (deprecated)"
 		}
 	],
 
