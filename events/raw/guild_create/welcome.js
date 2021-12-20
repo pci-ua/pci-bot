@@ -1,3 +1,5 @@
+const { MessageButton, MessageActionRow } = require('discord.js');
+
 module.exports = function(rawEvents) {
 	let data = rawEvents.d;
 	EmojiListe = {};
@@ -9,8 +11,11 @@ module.exports = function(rawEvents) {
 	}
 }
 
-
+function littlePause() {
+	return new Promise( (resolve) => setTimeout( resolve , 50) );	
+}
 async function update(server,channel,emojis) {
+	const bot = process.bot;
 	const serveur = bot.guilds.cache.get( server.id );
 	const salon = await serveur.channels.fetch( channel.id );
 
@@ -51,15 +56,15 @@ async function update(server,channel,emojis) {
 
 	await salon.send( {
 		'content': "⠀",
-		'files': [ './bvn.png' ]
-	} );
+		'files': [ './ressource/welcome/bvn.png' ]
+	} ); await littlePause();
 	await salon.send( {
 		'content': `Bienvenue sur le discord de **PC${emojis["i_"]}** : Projets et Cohésion en Informatique, association des étudiants en informatique de l'Université d'Angers.` + '\n' + `L'association **PC${emojis["i_"]}** propose divers services aux étudiants de la filière informatique de l'Université d'Angers et est ouverte à toutes et à tous.`
-	} );
+	} ); await littlePause();
 	await salon.send( {
 		'content': "⠀",
-		'files': [ './rules.png' ]
-	} );
+		'files': [ './ressource/welcome/rules.png' ]
+	} ); await littlePause();
 	await salon.send( {
 		'content': `
 ${emojis["mm"]}  Discussion ➔ Gardez un langage correct ( ~~insulte~~, ~~provocation~~, ~~prosélytisme~~, ~~NSFW~~ )
@@ -71,11 +76,11 @@ ${emojis["mm"]}  Sanction  ➔ La modération ne fixe que des sanctions temporai
 
 Si vous avez un doute, une question @Mod reste à votre disposition
 `
-	} );
+	} ); await littlePause();
 	await salon.send( {
 		'content': "⠀",
-		'files': [ './signin.png' ]
-	} );
+		'files': [ './ressource/welcome/signin.png' ]
+	} ); await littlePause();
 	await salon.send( {
 		'content': `
 Si c'est la première fois que vous utilisez discord, un tutoriel est accessible ► <#753941718704848906>
@@ -83,20 +88,20 @@ Si c'est la première fois que vous utilisez discord, un tutoriel est accessible
 Pour accéder aux autres channels, il faut indiquer votre niveau d'étude à l'UA :
 _ Les rôles dans les carrés gris sont soumis à une vérification manuelle, les tuteurs sont affectés manuellement. _
 `
-	} );
+	} ); await littlePause();
 	/* U+2800   Braille blank pattern   &#10240; */
 	await salon.send( {
 		'content': "⠀",
 		'components': [Aa,Ab]
-	} );
+	} ); await littlePause();
 	await salon.send( {
 		'content': "⠀",
 		'components': [Ba,Bb]
-	} );
+	} ); await littlePause();
 	await salon.send( {
 		'content': "⠀",
 		'components': [C]
-	} );
+	} ); await littlePause();
 
 
 }
