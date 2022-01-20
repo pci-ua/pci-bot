@@ -1,0 +1,12 @@
+{
+	"name": "info-poll",
+	"description": "Donne des détails sur un sondage",
+	"options": [
+		{
+			"name": "idsondage",
+			"description": "ID du sondage",
+			"type": 3,
+			"required": true
+		}
+	]
+}
