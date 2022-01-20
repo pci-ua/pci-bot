@@ -5,14 +5,15 @@ const { add } = require('../middleware/coin.js');
 
 async function main(interaction,bot) {
 
-	let delay = interaction.options.getInteger('delay');
-	if( delay ) {
-		await interaction.deferReply({ ephemeral: true })
-		await new Promise( (resolve) => setTimeout(resolve,delay*1000) );
-	}
 
 	if( ! isMemberBotAdmin(interaction.member) ) {
-		interaction.editReply({ content: 'Access denied', ephemeral: true});
+		interaction.reply({ content: 'Access denied', ephemeral: true});
+	}
+
+	let delay = interaction.options.getInteger('delay');
+	if( delay ) {
+		await interaction.deferReply()
+		await new Promise( (resolve) => setTimeout(resolve,delay*1000) );
 	}
 
 	let sondageID = interaction.options.getString('idsondage');
