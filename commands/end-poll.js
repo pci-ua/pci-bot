@@ -2,8 +2,6 @@ const { createCanvas, registerFont } = require('canvas');
 const { writeFileSync } = require('fs');
 const { isMemberBotAdmin } = require('../middleware/user.js');
 
-registerFont('NotoSansDisplay.ttf', { family: 'NotoSansDisplay' }); //https://fonts.google.com/noto/specimen/Noto+Sans+Display
-
 async function main(interaction,bot) {
 
 	if( ! isMemberBotAdmin(interaction.member) ) {
