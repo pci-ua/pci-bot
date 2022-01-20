@@ -60,8 +60,8 @@ module.exports = main;
 
 const send_not_found = (i) => i.reply( {content: `Sondage clos ou inexistant !`, ephemeral:true } );
 const send_already_done = (i) => i.reply( {content: `Vous avez déjà répondu pour : ${i.message.content}`, ephemeral:true } );
-const send_vote_ajouter = (i) => i.reply( {content: `Réponse ajouter pour : ${i.message.content}`, ephemeral:true } );
-const send_vote_retirer = (i) => i.reply( {content: `Réponse retirer pour : ${i.message.content}`, ephemeral:true } );
+const send_vote_ajouter = (i) => i.reply( {content: `Réponse ajoutée pour : ${i.message.content}`, ephemeral:true } );
+const send_vote_retirer = (i) => i.reply( {content: `Réponse retirée pour : ${i.message.content}`, ephemeral:true } );
 const send_pannel_participation = (i) => i.reply( { content: `_place your bet for :_\n${i.message.content}`, ephemeral:true ,
 	components: [
 		new MessageActionRow()
