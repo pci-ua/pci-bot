@@ -29,6 +29,7 @@ async function main(interaction,bot) {
 
 			const max20char = (texte) => (texte.length <= 20) ? texte : (texte.substring(0,16) + ' ...');
 
+			let bestID = sondage.answer.map( k => k.length ).reduce((bestIndex,currentAmount,currentIndex,arr)=>arr[bestIndex]<currentAmount?currentIndex:bestIndex,0);
 			// Création du graphe ligne par ligne
 			for(let i=0 ; i<sondage.reponses.length ; i++ ) {
 				let suffragePourI = sondage.answer[ i ].length / suffrageTotalExprime;
@@ -36,7 +37,7 @@ async function main(interaction,bot) {
 				dessin.strokeStyle = '#242424';
 				dessin.strokeRect( 220 + suffragePourI*250 , i*50 + 10 , (1-suffragePourI)*250 , 10 );
 				if( suffragePourI > 0 ) {
-					if( suffragePourI > 0.5 )
+					if( i == bestID )
 						dessin.strokeStyle = 'gold';
 					else
 						dessin.strokeStyle = 'teal';
