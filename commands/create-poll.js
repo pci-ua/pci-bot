@@ -1,3 +1,4 @@
+const { info } = require('console');
 const { MessageActionRow, MessageButton } = require('discord.js');
 const { isMemberBotAdmin } = require('../middleware/user.js');
 
@@ -10,8 +11,7 @@ async function main(interaction,bot) {
 	let poll = {
 		question: interaction.options.getString('question'),
 		reponses: [... new Array(5)].map( (_,i) => interaction.options.getString(`reponse${i+1}`) ).filter( k => k != null ),
-		officiel: interaction.options.getBoolean('officiel') || false,
-		masquer: interaction.options.getBoolean('masquer') || false
+		type: interaction.options.getString('type')
 	};
 
 	const row = new MessageActionRow()
@@ -25,8 +25,19 @@ async function main(interaction,bot) {
 		)
 	;
 
+	if( poll.type == 'pari' ) {
+		poll.mise = {};
+	}
+
+	let infoMSG;
+	switch( poll.type ) {
+		case 'vote': infoMSG='Choix unique, sans changement, sans mise.'; break;
+		case 'qcm': infoMSG='Choix multiple, avec changement, sans mise.'; break;
+		case 'pari': infoMSG='Choix unique, sans changement, avec mise, mise non reductible, mise augmentable.'; break;
+	}
+
 	interaction.reply(
-		{ content: `**${poll.question}**`, components: [row] }
+		{ content: `_${infoMSG}_\n**${poll.question}**`, components: [row] }
 	);
 
 	let sondage = await interaction.fetchReply();

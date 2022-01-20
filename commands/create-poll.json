@@ -8,6 +8,11 @@
 			"type": 3,
 			"required": true
 		},
+		{ "name": "type", "description": "Type de sondage", "required":true, "type": 3, "choices": [
+			{"name": "Vote (1 réponse max, sans mise)", "value": "vote" },
+			{"name": "QCM (n réponse max, sans mise)", "value": "qcm" },
+			{"name": "Pari (1 choix, avec mise)", "value": "pari" }
+		] },
 		{ "name": "reponse1", "description": "premiere réponse", "required": true, "type": 3 },
 		{ "name": "reponse2", "description": "seconde réponse", "required": true, "type": 3 },
 		{ "name": "reponse3", "description": "4ème réponse (optionnelle)", "required": false, "type": 3 },
