@@ -45,7 +45,7 @@ new Promise( (resolve, reject) => {
 	)
 })
 .then( () => console.log('bot : SlashCommands updated !' ) )
-.catch( (err) => console.error('bot : Erreur lors de la mise à jour des SlashCommands ! ') && console.error(err) )
+.catch( (err) => { console.error('bot : Erreur lors de la mise à jour des SlashCommands ! '); console.error(err)} )
 
 let commands = {};
 let interaction = {};
@@ -82,4 +82,7 @@ db.serialize(function() {
 	db.run('CREATE TABLE IF NOT EXISTS pcicoin (discord_id TEXT PRIMARY KEY, amount INTEGER)');
 });
 
+/////
+
 process.db = db;
+process.bot = bot;
