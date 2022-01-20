@@ -7,6 +7,18 @@
 			"description": "ID du sondage",
 			"type": 3,
 			"required": true
+		},
+		{
+			"name": "correctindex",
+			"description": "Index de la bonne réponse (start at 0) (by default the max in coin)",
+			"type": 3,
+			"required": false
+		},
+		{
+			"name": "delay",
+			"description": "Délais avant une cloture automatique (en seconde)",
+			"type": 4,
+			"required": false
 		}
 	]
 }
