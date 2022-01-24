@@ -11,12 +11,12 @@ function main(interaction,bot) {
 			// Déjà répondu sur le même vote avec la même option
 			switch( bot.sondages[interaction.message.id].type ) {
 				case 'vote':
-					return send_already_done(interaction);
+					return send_already_done(interaction,bot.sondages[interaction.message.id].question);
 				case 'qcm':
 					bot.sondages[interaction.message.id].answer[cid] = bot.sondages[interaction.message.id].answer[cid].filter( k => k != uid );
-					return send_vote_retirer(interaction);
+					return send_vote_retirer(interaction,bot.sondages[interaction.message.id].question);
 				case 'pari':
-					return send_pannel_participation(interaction);
+					return send_pannel_participation(interaction,bot.sondages[interaction.message.id].question);
 			}
 
 		} else
@@ -27,11 +27,11 @@ function main(interaction,bot) {
 				case 'vote':
 				case 'qcm':
 					bot.sondages[interaction.message.id].answer[cid].push(uid);
-					return send_vote_ajouter(interaction);
+					return send_vote_ajouter(interaction,bot.sondages[interaction.message.id].question);
 				case 'pari':
 					bot.sondages[interaction.message.id].answer[cid].push(uid);
 					bot.sondages[interaction.message.id].mise[uid] = 0;
-					return send_pannel_participation(interaction);
+					return send_pannel_participation(interaction,bot.sondages[interaction.message.id].question);
 			}
 
 		} else {
@@ -39,16 +39,16 @@ function main(interaction,bot) {
 			// Déjà répondu sur le même vote mais avec une autre option
 			switch( bot.sondages[interaction.message.id].type ) {
 				case 'vote':
-					return send_already_done(interaction);
+					return send_already_done(interaction,bot.sondages[interaction.message.id].question);
 				case 'qcm':
 					bot.sondages[interaction.message.id].answer[cid].push(uid);
-					return send_vote_ajouter(interaction);
+					return send_vote_ajouter(interaction,bot.sondages[interaction.message.id].question);
 				case 'pari':
-					return send_already_done(interaction);
+					return send_already_done(interaction,bot.sondages[interaction.message.id].question);
 			}
 
 
-			return send_already_done(interaction);
+			return send_already_done(interaction,bot.sondages[interaction.message.id].question);
 		}
 	} else {
 		return send_not_found(interaction);
@@ -59,10 +59,10 @@ module.exports = main;
 
 
 const send_not_found = (i) => i.reply( {content: `Sondage clos ou inexistant !`, ephemeral:true } );
-const send_already_done = (i) => i.reply( {content: `Vous avez déjà répondu pour : ${i.message.content}`, ephemeral:true } );
-const send_vote_ajouter = (i) => i.reply( {content: `Réponse ajoutée pour : ${i.message.content}`, ephemeral:true } );
-const send_vote_retirer = (i) => i.reply( {content: `Réponse retirée pour : ${i.message.content}`, ephemeral:true } );
-const send_pannel_participation = (i) => i.reply( { content: `_place your bet for :_\n${i.message.content}`, ephemeral:true ,
+const send_already_done = (i,q) => i.reply( {content: `Vous avez déjà répondu pour : ${q}`, ephemeral:true } );
+const send_vote_ajouter = (i,q) => i.reply( {content: `Réponse ajoutée pour : ${q}`, ephemeral:true } );
+const send_vote_retirer = (i,q) => i.reply( {content: `Réponse retirée pour : ${q}`, ephemeral:true } );
+const send_pannel_participation = (i,q) => i.reply( { content: `_place your bet for :_\n${q}`, ephemeral:true ,
 	components: [
 		new MessageActionRow()
 			.addComponents(
