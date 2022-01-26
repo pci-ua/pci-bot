@@ -1,0 +1,9 @@
+services:
+  pc-community:
+    build: ./
+    volumes:
+      - ./data:/data
+
+
+volumes:
+  volume: {}
