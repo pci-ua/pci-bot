@@ -56,7 +56,7 @@ class Graph {
 	}
 
 	write(name) {
-		let path = `./data/renduSondage_${name}.png`;
+		let path = `/data/renduSondage_${name}.png`;
 		writeFileSync( path ,this._canvas.toBuffer());
 		return path;
 	}

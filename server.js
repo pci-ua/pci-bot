@@ -76,7 +76,7 @@ bot.on('interactionCreate', interaction => {
 //////
 
 const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('./data/db');
+const db = new sqlite3.Database('/data/db');
 
 db.serialize(function() {
 	db.run('CREATE TABLE IF NOT EXISTS pcicoin (discord_id TEXT PRIMARY KEY, amount INTEGER)');
