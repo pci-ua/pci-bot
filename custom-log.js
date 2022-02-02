@@ -2,11 +2,8 @@
 const old = console;
 
 // New function for Date Object, (can't use arrow function to be able to use this)
-Date.prototype.toLogString = function () { return `[${this.toLocaleDateString()} ${this.toUTCString()}]`; }
-const nowToLogString = () => {
-	let now = new Date();
-	return now.toLogString();
-};
+Date.prototype.toLogString = () => `[ ${a.getFullYear()}/${(a.getMonth()+1).toString().padStart(2,0)}/${(a.getDay()).toString().padStart(2,0)} ${a.getHours().toString().padStart(2,0)}:${a.getMinutes().toString().padStart(2,0)} ${a.getSeconds()}' ]`;
+const nowToLogString = () => (new Date()).toLogString();
 
 console.old = {};
 
