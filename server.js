@@ -44,21 +44,22 @@ new Promise( (resolve, reject) => {
 		} )
 	)
 })
-.then( () => console.log('bot : SlashCommands updated !' ) )
-.catch( (err) => { console.error('bot : Erreur lors de la mise à jour des SlashCommands ! '); console.error(err)} )
+.then( () => console.log( 'SlashCommands updated !' ) )
+.catch( (err) => { console.error('SlashCommands an error occured during command syntax update ! ',err); } )
 
 let commands = {};
 let interaction = {};
 
-bot.on('interactionCreate', interaction => {
+bot.on('interactionCreate', async interaction => {
 	if( interaction.type == 'APPLICATION_COMMAND' ) {
+		console.log(`SlashCommand ${interaction.commandName} ask by ${interaction.member}` );
 		if( commands[interaction.commandName] === undefined ) {
 			commands[interaction.commandName] = require(`./commands/${interaction.commandName}.js`);
 		}
 		try {
-			commands[interaction.commandName](interaction,bot);
+			await commands[interaction.commandName](interaction,bot);
 		} catch( err ) {
-			console.error('bot : Erreur lors du traitement d une commande',{err,interaction});
+			console.error('Interaction Erreur lors du traitement d une commande',{err,interaction});
 		}
 	} else if( interaction.type == 'MESSAGE_COMPONENT' ) {
 		let interactionName = interaction.customId.split`_`[0];
@@ -66,9 +67,9 @@ bot.on('interactionCreate', interaction => {
 			interaction[interactionName] = require(`./interaction/${interactionName}.js`);
 		}
 		try {
-			interaction[interactionName](interaction,bot);
+			await interaction[interactionName](interaction,bot);
 		} catch ( err ) {
-			console.log('bot : Erreur lors du traitement d une interaction',{err,interaction});
+			console.log('Interaction Erreur lors du traitement d une interaction',{err,interaction});
 		}
 	}
 } );
