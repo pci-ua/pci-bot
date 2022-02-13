@@ -1,6 +1,6 @@
-const { isMemberBotAdmin } = require('../middleware/user.js');
-const { add } = require('../middleware/coin.js');
-const { Graph , GraphElement } = require('../module/graph.js');
+const { isMemberBotAdmin } = require('../../middleware/user.js');
+const { add } = require('../../middleware/coin.js');
+const { Graph , GraphElement } = require('../../module/graph.js');
 
 async function main(interaction,bot) {
 

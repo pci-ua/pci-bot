@@ -1,4 +1,4 @@
-const coin = require('../middleware/coin.js');
+const coin = require('../../middleware/coin.js');
 
 async function main(interaction,bot) {
 	let target = await interaction.options.getMember('who') || interaction.member;
