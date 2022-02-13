@@ -1,12 +1,19 @@
-require('dotenv').config();
-require('./custom-log.js');
-
-if( ['dev','test','prod'].indexOf( process.env.ENV ) === -1 ) throw `${process.env.ENV} is not a valid enviroment !`;
-
+// Import des bibliothèques
 const fs = require('fs');
 const { Client, Intents } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+
+// Chargement de la configuration 
+require('dotenv').config();
+
+// Chargement des plugins
+fs.readdirSync( './plugin/' )
+	.forEach( plugin => require(plugin) );
+
+
+if( ['dev','test','prod'].indexOf( process.env.ENV ) === -1 ) throw `${process.env.ENV} is not a valid enviroment !`;
+
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const rest = new REST({ version: '9' }).setToken( process.env.DISCORD_TOKEN );
