@@ -32,3 +32,12 @@ Production :
 ```bash
 npm run
 ```
+
+
+## Structure
+
+### Commandes
+
+Pour chaque commande il faut créer un dossier avec pour nom celui de la commande, ce dernier doit au minimum contenir les fichier suivants :
+ - `syntax.json` qui définie la syntaxe de la commande qui suis [la forme officiel](https://discord.com/developers/docs/interactions/application-commands#slash-commands-example-slash-command)
+ - `run.js` qui exporte une fonction qui sera appelée lorsque la commande sera utilisé le premier paramètres étant l'interaction lié à la commande et le second est le bot qui a reçu la commande.

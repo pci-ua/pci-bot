@@ -30,11 +30,7 @@ new Promise( (resolve, reject) => {
 					process.env.DISCORD_SERVER_TEST_ID
 				)
 			),
-			{ body:
-				liste
-					.filter( fichier => fichier.endsWith('.json') )
-					.map( fichier => require(`./commands/${fichier}`) )
-			}
+			{ body: liste.map( fichier => require(`./commands/${fichier}/syntax.json`) ) }
 		)
 		.then( function() {
 			resolve()
@@ -54,7 +50,7 @@ bot.on('interactionCreate', async interaction => {
 	if( interaction.type == 'APPLICATION_COMMAND' ) {
 		console.log(`SlashCommand ${interaction.commandName} ask by ${interaction.member}` );
 		if( commands[interaction.commandName] === undefined ) {
-			commands[interaction.commandName] = require(`./commands/${interaction.commandName}.js`);
+			commands[interaction.commandName] = require(`./commands/${interaction.commandName}/run.js`);
 		}
 		try {
 			await commands[interaction.commandName](interaction,bot);
