@@ -1,6 +1,6 @@
 {
 	"name": "PC[bot]",
-	"version": "3.1.0",
+	"version": "3.1.1",
 	"description": "Bot Discord de gestion du serveur PC[i]",
 	"main": "bot.js",
 	"authors": [
