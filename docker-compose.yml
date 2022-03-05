@@ -1,6 +1,7 @@
 services:
   pc-community:
     build: ./
+    restart: on-failure:2 
     volumes:
       - ./data:/data
 
