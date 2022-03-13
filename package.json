@@ -1,28 +1,26 @@
 {
 	"name": "PC[bot]",
-	"version": "3.1.1",
+	"version": "4.0.0",
 	"description": "Bot Discord de gestion du serveur PC[i]",
 	"main": "bot.js",
 	"authors": [
-		"Mathieu TOULON (aka StrategeFirst)",
-		"Mathew (aka appolomelon)"
+		"Mathieu TOULON (aka StrategeFirst) {2020-2022}",
+		"Mathew COYLE (aka appolomelon) {2020-2020}"
 	],
 	"scripts": {
 		"test": "echo \"No test command has been set yet ! \" && exit 1",
-		"start": "nodemon bot.js"
+		"start": "nodejs bot.js"
 	},
 	"dependencies": {
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"discord-api-types": "^0.24.0",
 		"discord.js": "^13.1.0",
 		"node-fetch": "^2.6.1",
-		"nodejs": "0.0.0",
-		"nodemon": "^2.0.15"
+		"nodejs": "0.0.0"
 	},
 	"repository": "./",
 	"license": "unknown",
 	"contact": [
-		"mathieu.toulon@free.fr",
-		"unknown"
+		"mathieu.toulon@free.fr"
 	]
 }
