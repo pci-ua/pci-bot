@@ -34,11 +34,9 @@ npm ci
 Une fois installer il vous faudra juste mettre en place le token, pour cela copier le fichier `safety.js.example` en `safety.js` et inséré votre token à la place du placeholder.
 Vous pourrez aussi éditer les différentes config disponibles dans le fichier `config.json`
 
-Pour lancer le bot : 
+Pour lancer le bot :
 ```bash
-npm run dev
-# ou /\ dev mode | prod mode \/
-npm run start
+npm start
 ```
 
 ## Contribution
