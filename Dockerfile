@@ -16,4 +16,4 @@ RUN npm i
 # Code
 COPY ./ /bot/
 # Default command
-ENTRYPOINT npm run dev
+ENTRYPOINT npm start
