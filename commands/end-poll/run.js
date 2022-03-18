@@ -1,6 +1,6 @@
-const { isMemberBotAdmin } = require('../middleware/user.js');
-const { add } = require('../middleware/coin.js');
-const { Graph , GraphElement } = require('../module/graph.js');
+const { isMemberBotAdmin } = require('../../middleware/user.js');
+const { add } = require('../../middleware/coin.js');
+const { Graph , GraphElement } = require('../../module/graph.js');
 
 async function main(interaction,bot) {
 
@@ -17,9 +17,19 @@ async function main(interaction,bot) {
 
 	// Délais
 	let delay = interaction.options.getInteger('delay') ?? 0;
-	await interaction.deferReply();
-	await new Promise( (resolve) => setTimeout(resolve,delay*1000) );
-	await interaction.editReply('Résultat soon ...');
+	if(delay > 0) {
+		await interaction.reply(`Résultat prévu pour ${new Date( (+new Date())+ delay*1000 ).toLogString() }`);
+		await new Promise( (resolve) => setTimeout(resolve,delay*1000) );
+		// Existance après délais
+		let sondageID = interaction.options.getString('idsondage');
+		if( ! bot.sondages[ sondageID] ) {
+			return await interaction.editReply('Sondage obsolète');
+		} else {
+			await interaction.editReply('Résultat ✓');
+		}
+	} else {
+		await interaction.reply('Résultat soon ...');
+	}
 
 	// Génération réponse :
 	const sondage = bot.sondages[ sondageID ];

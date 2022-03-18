@@ -1,12 +1,19 @@
-require('dotenv').config();
-require('./custom-log.js');
-
-if( ['dev','test','prod'].indexOf( process.env.ENV ) === -1 ) throw `${process.env.ENV} is not a valid enviroment !`;
-
+// Import des bibliothèques
 const fs = require('fs');
 const { Client, Intents } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+
+// Chargement de la configuration 
+require('dotenv').config();
+
+// Chargement des plugins
+fs.readdirSync( './plugin/' )
+	.forEach( plugin => require(plugin) );
+
+
+if( ['dev','test','prod'].indexOf( process.env.ENV ) === -1 ) throw `${process.env.ENV} is not a valid enviroment !`;
+
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const rest = new REST({ version: '9' }).setToken( process.env.DISCORD_TOKEN );
@@ -30,11 +37,7 @@ new Promise( (resolve, reject) => {
 					process.env.DISCORD_SERVER_TEST_ID
 				)
 			),
-			{ body:
-				liste
-					.filter( fichier => fichier.endsWith('.json') )
-					.map( fichier => require(`./commands/${fichier}`) )
-			}
+			{ body: liste.map( fichier => require(`./commands/${fichier}/syntax.json`) ) }
 		)
 		.then( function() {
 			resolve()
@@ -44,21 +47,22 @@ new Promise( (resolve, reject) => {
 		} )
 	)
 })
-.then( () => console.log('bot : SlashCommands updated !' ) )
-.catch( (err) => { console.error('bot : Erreur lors de la mise à jour des SlashCommands ! '); console.error(err)} )
+.then( () => console.log( 'SlashCommands updated !' ) )
+.catch( (err) => { console.error('SlashCommands an error occured during command syntax update ! ',err); } )
 
 let commands = {};
 let interaction = {};
 
-bot.on('interactionCreate', interaction => {
+bot.on('interactionCreate', async interaction => {
 	if( interaction.type == 'APPLICATION_COMMAND' ) {
+		console.log(`SlashCommand ${interaction.commandName} ask by ${interaction.member}` );
 		if( commands[interaction.commandName] === undefined ) {
-			commands[interaction.commandName] = require(`./commands/${interaction.commandName}.js`);
+			commands[interaction.commandName] = require(`./commands/${interaction.commandName}/run.js`);
 		}
 		try {
-			commands[interaction.commandName](interaction,bot);
+			await commands[interaction.commandName](interaction,bot);
 		} catch( err ) {
-			console.error('bot : Erreur lors du traitement d une commande',{err,interaction});
+			console.error('Interaction Erreur lors du traitement d une commande',{err,interaction});
 		}
 	} else if( interaction.type == 'MESSAGE_COMPONENT' ) {
 		let interactionName = interaction.customId.split`_`[0];
@@ -66,9 +70,9 @@ bot.on('interactionCreate', interaction => {
 			interaction[interactionName] = require(`./interaction/${interactionName}.js`);
 		}
 		try {
-			interaction[interactionName](interaction,bot);
+			await interaction[interactionName](interaction,bot);
 		} catch ( err ) {
-			console.log('bot : Erreur lors du traitement d une interaction',{err,interaction});
+			console.log('Interaction Erreur lors du traitement d une interaction',{err,interaction});
 		}
 	}
 } );

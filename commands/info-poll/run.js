@@ -1,5 +1,5 @@
-const { isMemberBotAdmin } = require('../middleware/user.js');
-const { emoji } = require('../middleware/coin.js');
+const { isMemberBotAdmin } = require('../../middleware/user.js');
+const { emoji } = require('../../middleware/coin.js');
 async function main(interaction,bot) {
 
 	if( ! isMemberBotAdmin(interaction.member) ) {

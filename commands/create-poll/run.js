@@ -1,6 +1,6 @@
 const { info } = require('console');
 const { MessageActionRow, MessageButton } = require('discord.js');
-const { isMemberBotAdmin } = require('../middleware/user.js');
+const { isMemberBotAdmin } = require('../../middleware/user.js');
 
 async function main(interaction,bot) {
 
