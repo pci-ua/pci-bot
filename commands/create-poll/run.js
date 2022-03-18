@@ -14,6 +14,10 @@ async function main(interaction,bot) {
 		type: interaction.options.getString('type')
 	};
 
+	if( poll.reponses.some( R => R.length > 80 ) {
+		return interaction.reply( { content: 'Les réponses doivent faires moins de 80 caractères de long', ephemeral: true} );
+	}
+
 	const row = new MessageActionRow()
 		.addComponents(
 			... poll.reponses.map(
