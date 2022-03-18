@@ -54,26 +54,30 @@ let commands = {};
 let interaction = {};
 
 bot.on('interactionCreate', async interaction => {
-	if( interaction.type == 'APPLICATION_COMMAND' ) {
-		console.log(`SlashCommand ${interaction.commandName} ask by ${interaction.member}` );
-		if( commands[interaction.commandName] === undefined ) {
-			commands[interaction.commandName] = require(`./commands/${interaction.commandName}/run.js`);
+	try {
+		if( interaction.type == 'APPLICATION_COMMAND' ) {
+			console.log(`SlashCommand ${interaction.commandName} ask by ${interaction.member}` );
+			if( commands[interaction.commandName] === undefined ) {
+				commands[interaction.commandName] = require(`./commands/${interaction.commandName}/run.js`);
+			}
+			try {
+				await commands[interaction.commandName](interaction,bot);
+			} catch( err ) {
+				console.error('Interaction Erreur lors du traitement d\'une slash command',{err,interaction});
+			}
+		} else if( interaction.type == 'MESSAGE_COMPONENT' ) {
+			let interactionName = interaction.customId.split`_`[0];
+			if( interaction[interactionName] === undefined ) {
+				interaction[interactionName] = require(`./interaction/${interactionName}.js`);
+			}
+			try {
+				await interaction[interactionName](interaction,bot);
+			} catch ( err ) {
+				console.error('Interaction Erreur lors du traitement d\'un composant de message',{err,interaction});
+			}
 		}
-		try {
-			await commands[interaction.commandName](interaction,bot);
-		} catch( err ) {
-			console.error('Interaction Erreur lors du traitement d une commande',{err,interaction});
-		}
-	} else if( interaction.type == 'MESSAGE_COMPONENT' ) {
-		let interactionName = interaction.customId.split`_`[0];
-		if( interaction[interactionName] === undefined ) {
-			interaction[interactionName] = require(`./interaction/${interactionName}.js`);
-		}
-		try {
-			await interaction[interactionName](interaction,bot);
-		} catch ( err ) {
-			console.log('Interaction Erreur lors du traitement d une interaction',{err,interaction});
-		}
+	} catch(err) {
+		console.error('Interaction Erreur lors du traitement d\'une interaction,',{err,interaction});
 	}
 } );
 
