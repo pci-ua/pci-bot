@@ -25,7 +25,9 @@ async function main(interaction,bot) {
 		if( ! bot.sondages[ sondageID] ) {
 			return await interaction.editReply('Sondage obsolète');
 		} else {
-			await interaction.editReply('Résultat ✓');
+			if( delay < 150 ) { // Webhook close after a period of time so do not try to edit
+				await interaction.editReply('Résultat ✓');
+			}
 		}
 	} else {
 		await interaction.reply('Résultat soon ...');
