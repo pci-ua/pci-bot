@@ -21,14 +21,14 @@ PC\[bot\] est un robot de gestion du discord de PC\[i\]
 ## Installation
 
 Prérequis :
- - NodeJS : min `v16.0.0` recommandé `v16.13.0`
- - npm : min `v8.0.0` recommandé `v8.1.0`
+ - docker : min `v20.10.0`
+ - docker-compose : min `v1.29.2`
 
 Une fois ces pré-requis satisfait :
 ``` bash
 git clone https://github.com/pci-ua/pci-bot.git
 cd pci-bot
-npm ci
+docker-compose build
 ```
 
 Une fois installer il vous faudra juste mettre en place le token, pour cela copier le fichier `safety.js.example` en `safety.js` et inséré votre token à la place du placeholder.
@@ -36,7 +36,7 @@ Vous pourrez aussi éditer les différentes config disponibles dans le fichier `
 
 Pour lancer le bot :
 ```bash
-npm start
+docker-compose up
 ```
 
 ## Contribution
