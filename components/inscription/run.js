@@ -76,7 +76,7 @@ ${ask}
 		case 'accepter':
 		case 'refuser':
 			let [,mention,askedRole] = interaction.message.content.split`\n`;
-			let id = mention.match(/<@([0-9]+)>/)[1];
+			let id = mention.match(/<@!?([0-9]+)>/)[1];
 
 			const target = await serveur.members.fetch( id );
 			if( ask == 'accepter' ) {
