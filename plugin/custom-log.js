@@ -1,6 +1,6 @@
 
 // New function for Date Object, (can't use arrow function to be able to use this)
-Date.prototype.toLogString = function () { return `[ ${this.getFullYear()}/${(this.getMonth()+1).toString().padStart(2,0)}/${(this.getDay()).toString().padStart(2,0)} ${this.getHours().toString().padStart(2,0)}:${this.getMinutes().toString().padStart(2,0)} ${this.getSeconds().toString().padStart(2,' ')}' ]`; }
+Date.prototype.toLogString = function () { return `[ ${this.getFullYear()}/${(this.getMonth()+1).toString().padStart(2,0)}/${(this.getDate()).toString().padStart(2,0)} ${this.getHours().toString().padStart(2,0)}:${this.getMinutes().toString().padStart(2,0)} ${this.getSeconds().toString().padStart(2,' ')}' ]`; }
 const nowToLogString = () => (new Date()).toLogString();
 
 console.old = {};
