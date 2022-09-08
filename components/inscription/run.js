@@ -37,7 +37,7 @@ module.exports = async function(interaction) {
 		case 'doctorant':
 		case 'alumni':
 		case 'externe':
-			await interaction.reply({ content : `La demande que vous avez faite pour le rôle a été transférer, une verification manuel est en cours, merci de patienter et de répondre à la modération.` , ephemeral : true });
+			await interaction.reply({ content : `La demande que vous avez faite pour le rôle a été transférée, une verification manuel est en cours, merci de patienter et de répondre à la modération.` , ephemeral : true });
 			let salon = await process.bot.channels.fetch( process.bot.config.pingRoleChannelId );
 			let message = `
 Demande de rôle :
@@ -83,7 +83,7 @@ ${ask}
 				target.roles.add( role.find( x => x.name.toLowerCase() === askedRole ).id );
 			}
 			await target.send(`Votre demande pour le rôle ${askedRole} a été ${ask}.`);
-			await interaction.reply({ content : `${(ask=='accepter')?'✅':'❌'} La demande de ${target} pour rôle ${askedRole} a été ${ask} par ${membre} ` });
+			await interaction.reply({ content : `${(ask=='accepter')?'✅':'❌'} La demande de ${target} pour rôle ${askedRole} a été ${(ask=='accepter')?'acceptée':'refusée'} par ${membre} ` });
 			return await interaction.message.delete();
 	}
 }
