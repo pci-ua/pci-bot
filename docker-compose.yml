@@ -1,4 +1,4 @@
 services:
-  pc-community:
+  pci-bot:
     build: ./
     restart: on-failure:2 
