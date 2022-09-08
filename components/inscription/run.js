@@ -23,14 +23,14 @@ module.exports = async function(interaction) {
 			return interaction.reply({ content : `Le rôle ${ask} vous a été ajouté.` , ephemeral: true });
 
 		// Rôle complexe
-		case 'm2id':
+		case 'm2ia':
 			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2' ).id );
-			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2-id' ).id );
-			return interaction.reply({ content : `Les rôle M2 et M2 ID vous ont été ajouté.` , ephemeral: true });
-		case 'm2acdi':
+			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2-ia' ).id );
+			return interaction.reply({ content : `Les rôle M2 et M2 IA vous ont été ajouté.` , ephemeral: true });
+		case 'm2cd':
 			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2' ).id );
-			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2-acdi' ).id );
-			return interaction.reply({ content : `Les rôle M2 et M2 ACDI vous ont été ajouté.` , ephemeral: true });
+			await membre.roles.add( role.find( x => x.name.toLowerCase() === 'm2-cd' ).id );
+			return interaction.reply({ content : `Les rôle M2 et M2 CD vous ont été ajouté.` , ephemeral: true });
 
 	/* Cases grises */
 		case 'enseignant':
@@ -58,14 +58,14 @@ ${ask}
 			membre
 			.roles
 			.cache
-			.filter( role => ['l1','l2','l3','l3 pro','m1','m2','m2-id','m2-acdi'].contains(role.name.toLowerCase()) )
+			.filter( role => ['l1','l2','l3','l3 pro','m1','m2','m2-ia','m2-cd'].contains(role.name.toLowerCase()) )
 			.map( v => v.name )
 			.join(', ');
 			await membre.roles.remove(
 				membre
 				.roles
 				.cache
-				.filter( role => ['l1','l2','l3','l3 pro','m1','m2','m2-id','m2-acdi'].contains(role.name.toLowerCase()) )
+				.filter( role => ['l1','l2','l3','l3 pro','m1','m2','m2-ia','m2-cd'].contains(role.name.toLowerCase()) )
 				.map( (_,k) => k )
 			);
 			return await interaction.reply( {content: `Les rôles ${roleRemoveTexte} vous ont été retirés.` , ephemeral : true });

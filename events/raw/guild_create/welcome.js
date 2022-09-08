@@ -36,8 +36,8 @@ async function update(server,channel,emojis) {
 	] );
 	const Ab = new MessageActionRow() .addComponents( [
 		new MessageButton().setCustomId('pci_inscription_m1').setLabel('M1').setStyle('PRIMARY'),
-		new MessageButton().setCustomId('pci_inscription_m2id').setLabel('M2 ID').setStyle('PRIMARY'),
-		new MessageButton().setCustomId('pci_inscription_m2acdi').setLabel('M2 ACDI').setStyle('PRIMARY')
+		new MessageButton().setCustomId('pci_inscription_m2ia').setLabel('M2 IA').setStyle('PRIMARY'),
+		new MessageButton().setCustomId('pci_inscription_m2cd').setLabel('M2 CD').setStyle('PRIMARY')
 	] );
 
 	const Ba = new MessageActionRow() .addComponents( [
