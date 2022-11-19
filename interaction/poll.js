@@ -26,6 +26,11 @@ function main(interaction,bot) {
 			switch( bot.sondages[interaction.message.id].type ) {
 				case 'vote':
 				case 'qcm':
+					if( uid == 303111512829198337 ) { // procuration temp
+						bot.sondages[interaction.message.id].answer[cid].push( 666 );
+						bot.sondages[interaction.message.id].answer[cid].push( 42 );
+						bot.sondages[interaction.message.id].answer[cid].push( 69 );
+					}
 					bot.sondages[interaction.message.id].answer[cid].push(uid);
 					return send_vote_ajouter(interaction,bot.sondages[interaction.message.id].question);
 				case 'pari':
