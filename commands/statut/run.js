@@ -22,25 +22,33 @@ async function responseTime( WebSite ) {
 // à partir d'une réponse serveur avec des données prépares les textes du messages
 function traitementData( reponse ) {
 	let info = {};
-	info.name = `${reponse.nom} [ ${reponse.URL} ]`;
+	info.name = reponse.nom;
+	info.URL = reponse.URL;
 	if( reponse.error ) {
-		info.value = `:octagonal_sign: Timeout | Erreur : ${reponse.error}`
+		info.badge = `:octagonal_sign:`;
+		info.delay = ` Error !`
+		info.details = `${reponse.error}`
 	} else {
 		switch (true) {
 			case (reponse.delay < 200) :
-				info.value = `:green_circle: ${ reponse.delay }ms`;
+				info.badge = `:green_circle:`
+				info.delay =  `${ reponse.delay }ms`;
 				break;
 			case (reponse.delay < 500) :
-				info.value = `:yellow_circle: ${ reponse.delay }ms`;
+				info.badge = `:yellow_circle:`
+				info.delay =  `${ reponse.delay }ms`;
 				break;
 			case (reponse.delay < 1000) :
-				info.value = `:orange_circle: ${ reponse.delay }ms`;
+				info.badge = `:orange_circle:`
+				info.delay =  `${ reponse.delay }ms`;
 				break;
 			case (reponse.delay >= 1000) :
-				info.value = `:red_circle: ${ reponse.delay }ms`;
+				info.badge = `:red_circle:`
+				info.delay =  `${ reponse.delay }ms`;
 				break;
 			default:
-				info.value = ':black_circle: Timeout !';
+				info.badge = `:black_circle:`;
+				info.delay =  ` Timeout !`;
 		}
 	}
 	return info;
@@ -51,7 +59,7 @@ module.exports = async ( interaction ) => {
 	// Message temporaire le temps de rechercher les informations
 	await interaction.reply( {content: DATA.reponse.chargement} );
 
-	// Méthode anti DDOS via cooldown
+	// Méthode anti spam via cooldown
 	const now = new Date();
 	if( now - cooldown_timer < DATA.cooldown_ms ) {
 		const remainingSeconds = (DATA.cooldown_ms - (now - cooldown_timer))/1000;
@@ -62,12 +70,23 @@ module.exports = async ( interaction ) => {
 
 		let reponse = Message.embed( "Statut des serveurs de l'UA" ,`Page statut UA http://supervision.univ-angers.fr/ (pas très très précises)`);
 
-		// Récupération des données (envoie requête)
-		(await Promise.all(DATA.listeServeurUA.map(responseTime)))
-		// Prépartion des données (Prépartion du texte etc)
-		.map(traitementData)
-		// Incorporation des données (Ajout au message)
-		.forEach( ( info ) => reponse.addField( info.name , info.value ) );
+		// Ping servers
+		const info = (await Promise.all(DATA.listeServeurUA.map(responseTime))).map(traitementData)
+
+		reponse.addFields( { name: '\u200B', value: '\u200B' } )
+		reponse.addFields(
+			{ value:'_ _' , inline: true , name:':vertical_traffic_light: Latence'},
+			{ value:'_ _' , inline: true , name:'Service'},
+			{ value:'_ _' , inline: true , name:'URL'},
+		)
+		info.forEach( request => {
+			reponse.addFields(
+				{ name: '_ _' , inline: true , value: `${request.badge} ${request.delay}` },
+				{ name: '_ _' , inline: true , value: `${request.name}` },
+				{ name: '_ _' , inline: true , value: `${request.URL}` },
+			)
+		} )
+		reponse.addFields( { name: '\u200B', value: '\u200B' } )
 
 		// Envoie de la réponse généré
 		await interaction.editReply( {content:DATA.reponse.resultat,embeds:[reponse]} );
