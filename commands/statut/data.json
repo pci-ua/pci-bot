@@ -6,6 +6,16 @@
 		},
 
 		{
+		  "URL" : "https://casv6.univ-angers.fr/cas/login",
+		  "nom" : "CAS"
+		},
+
+		{
+		  "URL" : "https://arexis.univ-angers.fr/",
+		  "nom" : "arexis"
+		},
+		
+		{
 		  "URL" : "https://moodle.univ-angers.fr/",
 		  "nom" : "Moodle"
 		},
@@ -18,16 +28,6 @@
 		{
 			"URL" : "https://leria-etud.univ-angers.fr/",
 			"nom" : "Starwars"
-		},
-		
-		{
-		  "URL" : "http://devel.info.univ-angers.fr/",
-		  "nom" : "Devel (deprecated)"
-		},
-
-		{
-		  "URL" : "http://forge.info.univ-angers.fr/",
-		  "nom" : "Forge (deprecated)"
 		}
 	],
 
