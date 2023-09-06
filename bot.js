@@ -1,7 +1,7 @@
 /********************
 * PC[bot]
 * Author : Matthew (aka apolloLemon), Mathieu T. (aka StrategeFirst)
-* Authors contact : unknown, mathieu.toulon@free.fr
+* Contact : contact@projetcohesion.info
 * Release date : 25/10/2020
 * Last update : 06/09/2023
 * Version : 4.1.0

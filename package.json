@@ -4,7 +4,7 @@
 	"description": "Bot Discord de gestion du serveur PC[i]",
 	"main": "bot.js",
 	"authors": [
-		"Mathieu TOULON (aka StrategeFirst) {2020-2022}",
+		"Mathieu TOULON (aka StrategFirst) {2020-2023}",
 		"Mathew COYLE (aka appolomelon) {2020-2020}"
 	],
 	"scripts": {
@@ -21,6 +21,6 @@
 	"repository": "./",
 	"license": "unknown",
 	"contact": [
-		"mathieu.toulon@free.fr"
+		"contact@projetcohesion.info"
 	]
 }
