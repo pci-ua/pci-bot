@@ -1,11 +1,10 @@
 # OS
-FROM node:alpine
+FROM node:20-alpine
 
-# Code
+# Setup dependencies
 WORKDIR /bot
-COPY ./ /bot/
-
-# Installation dependencies
+COPY package.json /bot/
+COPY package-lock.json /bot/
 RUN npm ci
 
 # Default command
