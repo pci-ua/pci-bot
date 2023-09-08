@@ -1,4 +1,8 @@
 services:
   pci-bot:
-    build: ./
-    restart: on-failure:2 
+    build: .
+    working_dir: /bot/src/
+    restart: on-failure:3
+    volumes:
+      - .:/bot/src/
+    entrypoint: npm start
